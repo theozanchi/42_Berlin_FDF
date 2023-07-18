@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 10:52:20 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/07/18 17:38:22 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/07/18 18:29:47 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_exit	parse_map(int fd, t_map **map)
 			{
 				free_char_array(line_split);
 				free(line);
-				free_map(*map);
+				free_map(map);
 				return (FAILURE);
 			}
 			node->x = x_counter;

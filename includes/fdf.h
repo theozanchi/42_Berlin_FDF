@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 10:55:44 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/07/18 15:18:22 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/07/18 17:41:52 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int		error(char *s);
 
 /*free*/
 void	free_char_array(char **s);
-void	free_map(t_map *map);
+void	free_map(t_map **map);
 
 /*main*/
 int		main(int argc, char **argv);

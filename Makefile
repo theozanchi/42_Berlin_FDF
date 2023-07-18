@@ -6,12 +6,12 @@
 #    By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/12 10:48:22 by tzanchi           #+#    #+#              #
-#    Updated: 2023/07/18 17:17:22 by tzanchi          ###   ########.fr        #
+#    Updated: 2023/07/18 18:24:26 by tzanchi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror -g #-fsanitize=address
+CFLAGS		=	-Wall -Wextra -Werror -g -fsanitize=address
 NAME		=	fdf
 LIBFT		=	libft.a
 MINILIB		=	libmlx.a

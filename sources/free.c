@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 12:20:23 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/07/18 14:50:33 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/07/18 17:41:22 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,19 @@ void	free_char_array(char **s)
 	free(s);
 }
 
-void	free_map(t_map *map)
+void	free_map(t_map **map)
 {
 	t_map	*current;
 	t_map	*next;
 
-	if (!map)
+	if (!map || !*map)
 		return ;
-	current = map;
+	current = *map;
 	while (current)
 	{
 		next = current->next;
 		free(current);
 		current = next;
 	}
-	map = NULL;
+	*map = NULL;
 }
