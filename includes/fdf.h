@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 10:55:44 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/07/18 19:45:27 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/07/18 20:21:03 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	free_map(t_map **map);
 int		main(int argc, char **argv);
 
 /*map_parsing*/
+t_exit	parse_line(char *line, t_map **map, int x_counter);
 t_exit	parse_map(int fd, t_map **map);
 
 /*utils_list*/
