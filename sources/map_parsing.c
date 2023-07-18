@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 10:52:20 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/07/18 17:33:04 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/07/18 17:38:22 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,11 @@ t_exit	parse_map(int fd, t_map **map)
 {
 	char	*line;
 	char	**line_split;
-	t_map	**ptr;
 	t_map	*node;
 	int		x_counter;
 	int		y_counter;
 
 	*map = NULL;
-	ptr = map;
 	x_counter = 0;
 	line = get_next_line(fd);
 	while (line)
@@ -44,8 +42,8 @@ t_exit	parse_map(int fd, t_map **map)
 			node->z = ft_atoi(*line_split++);
 			node->end_of_line = (*line_split == NULL);
 			node->next = NULL;
-			*ptr = node;
-			ptr = &(node->next);
+			*map = node;
+			map = &(node->next);
 		}
 		x_counter++;
 		free_char_array(line_split);
