@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 10:52:20 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/07/18 17:15:41 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/07/18 17:33:04 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,13 @@ t_exit	parse_map(int fd, t_map **map)
 {
 	char	*line;
 	char	**line_split;
-	t_map	*ptr;
+	t_map	**ptr;
+	t_map	*node;
 	int		x_counter;
 	int		y_counter;
 
-	*map = malloc(sizeof(t_map *));
-	if (!*map)
-		return (FAILURE);
-	ptr = *map;
+	*map = NULL;
+	ptr = map;
 	x_counter = 0;
 	line = get_next_line(fd);
 	while (line)
@@ -32,19 +31,26 @@ t_exit	parse_map(int fd, t_map **map)
 		y_counter = 0;
 		while (*line_split)
 		{
-			ptr->x = x_counter;
-			ptr->y = y_counter++;
-			ptr->z = ft_atoi(*line_split++);
-			ptr->end_of_line = FALSE;
-			ptr->next = malloc(sizeof(t_map));
-			ptr = ptr->next;
+			node = malloc(sizeof(t_map));
+			if (!node)
+			{
+				free_char_array(line_split);
+				free(line);
+				free_map(*map);
+				return (FAILURE);
+			}
+			node->x = x_counter;
+			node->y = y_counter++;
+			node->z = ft_atoi(*line_split++);
+			node->end_of_line = (*line_split == NULL);
+			node->next = NULL;
+			*ptr = node;
+			ptr = &(node->next);
 		}
-		ptr->end_of_line = TRUE;
 		x_counter++;
 		free_char_array(line_split);
 		free(line);
 		line = get_next_line(fd);
 	}
-	ptr->next = NULL;
 	return (SUCCESS);
 }
