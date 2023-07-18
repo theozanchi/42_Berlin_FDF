@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 10:55:44 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/07/18 17:41:52 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/07/18 19:45:27 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,9 @@ int		main(int argc, char **argv);
 
 /*map_parsing*/
 t_exit	parse_map(int fd, t_map **map);
+
+/*utils_list*/
+t_map	*ft_lstnew(int x, int y, int z, t_bool end_of_line);
+void	ft_lstadd_back(t_map **lst, t_map *new);
 
 #endif

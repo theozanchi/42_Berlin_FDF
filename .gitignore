@@ -1,3 +1,4 @@
 *.a
 fdf
 .vscode
+*.o
