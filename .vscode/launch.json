@@ -10,7 +10,7 @@
 			"request": "launch",
 			"program": "/home/tzanchi/42_Berlin_FDF/fdf",
 			"preLaunchTask": "make",
-			"args": ["maps/test.fdf"],
+			"args": ["maps/42.fdf"],
 			"stopAtEntry": false,
 			"cwd": "/home/tzanchi/42_Berlin_FDF",
 			"environment": [],
