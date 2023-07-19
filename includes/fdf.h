@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 10:55:44 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/07/18 20:21:03 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/07/19 19:02:45 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define FDF_H
 
 # include "../libft/libft.h"
-# include "../minilibx-linux/mlx.h"
+# include "../MLX42/include/MLX42/MLX42.h"
 # include <math.h>
 # include <fcntl.h>
 # include <unistd.h>
