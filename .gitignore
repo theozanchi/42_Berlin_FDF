@@ -2,3 +2,4 @@
 fdf
 .vscode
 *.o
+*.dSYM
