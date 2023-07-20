@@ -6,17 +6,17 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 19:17:03 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/07/18 19:53:23 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/07/20 10:26:36 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-t_map	*ft_lstnew(int x, int y, int z, t_bool end_of_line)
+t_3d_vector	*ft_lstnew(int x, int y, int z, t_bool end_of_line)
 {
-	t_map	*new;
+	t_3d_vector	*new;
 
-	new = malloc(sizeof(t_map));
+	new = malloc(sizeof(t_3d_vector));
 	if (new == NULL)
 		return (NULL);
 	new->x = x;
@@ -27,9 +27,9 @@ t_map	*ft_lstnew(int x, int y, int z, t_bool end_of_line)
 	return (new);
 }
 
-void	ft_lstadd_back(t_map **lst, t_map *new)
+void	ft_lstadd_back(t_3d_vector **lst, t_3d_vector *new)
 {
-	t_map	*ptr;
+	t_3d_vector	*ptr;
 
 	if (!*lst)
 		*lst = new;

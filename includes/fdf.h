@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 10:55:44 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/07/19 19:02:45 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/07/20 10:30:22 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,32 +31,32 @@ typedef enum e_exit
 	SUCCESS
 }	t_exit;
 
-typedef struct s_map
+typedef struct s_3d_vector
 {
-	int				x;
-	int				y;
-	int				z;
-	t_bool			end_of_line;
-	struct s_map	*next;
-}	t_map;
+	int					x;
+	int					y;
+	int					z;
+	t_bool				end_of_line;
+	struct s_3d_vector	*next;
+}	t_3d_vector;
 
 /*errors*/
 t_bool	arg_is_valid(int argc, char **argv);
 int		error(char *s);
 
+/*file_parsing*/
+t_exit	parse_line(char *line, t_3d_vector **vectors, int x_counter);
+t_exit	parse_fdf_file(int fd, t_3d_vector **vectors);
+
 /*free*/
 void	free_char_array(char **s);
-void	free_map(t_map **map);
+void	free_vectors(t_3d_vector **vectors);
 
 /*main*/
 int		main(int argc, char **argv);
 
-/*map_parsing*/
-t_exit	parse_line(char *line, t_map **map, int x_counter);
-t_exit	parse_map(int fd, t_map **map);
-
 /*utils_list*/
-t_map	*ft_lstnew(int x, int y, int z, t_bool end_of_line);
-void	ft_lstadd_back(t_map **lst, t_map *new);
+t_3d_vector	*ft_lstnew(int x, int y, int z, t_bool end_of_line);
+void	ft_lstadd_back(t_3d_vector **lst, t_3d_vector *new);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/12 10:48:22 by tzanchi           #+#    #+#              #
-#    Updated: 2023/07/19 20:08:48 by tzanchi          ###   ########.fr        #
+#    Updated: 2023/07/20 10:30:07 by tzanchi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,9 +22,9 @@ LIBFT_DIR	=	./libft/
 MLX42_DIR	=	./MLX42/
 
 SRC			=	errors.c \
+				file_parsing.c \
 				free.c \
 				main.c \
-				map_parsing.c \
 				utils_list.c
 
 SRCS		=	$(addprefix ${SRCS_DIR}, ${SRC})

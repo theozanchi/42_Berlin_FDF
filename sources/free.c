@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 12:20:23 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/07/18 20:13:48 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/07/20 10:27:34 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,19 @@ void	free_char_array(char **s)
 	free(s);
 }
 
-void	free_map(t_map **map)
+void	free_vectors(t_3d_vector **vectors)
 {
-	t_map	*current;
-	t_map	*next;
+	t_3d_vector	*current;
+	t_3d_vector	*next;
 
-	if (!map || !*map)
+	if (!vectors || !*vectors)
 		return ;
-	current = *map;
+	current = *vectors;
 	while (current)
 	{
 		next = current->next;
 		free(current);
 		current = next;
 	}
-	*map = NULL;
+	*vectors = NULL;
 }
