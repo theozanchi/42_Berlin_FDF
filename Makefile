@@ -6,7 +6,7 @@
 #    By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/12 10:48:22 by tzanchi           #+#    #+#              #
-#    Updated: 2023/07/24 12:16:33 by tzanchi          ###   ########.fr        #
+#    Updated: 2023/07/24 12:47:25 by tzanchi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,10 @@ all:
 				make ${NAME}
 
 ${LIBFT}:
+				@if [ -d ${LIBFT_DIR} ]; \
+				then git -C ${LIBFT_DIR} pull; \
+				else git clone git@github.com:theozanchi/42_Berlin_libft.git ${LIBFT_DIR}; \
+				fi
 				make -C ${LIBFT_DIR}
 				mv ${LIBFT_DIR}/${LIBFT} .
 
