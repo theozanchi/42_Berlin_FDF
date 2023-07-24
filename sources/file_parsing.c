@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_parsing.c                                      :+:      :+:    :+:   */
+/*   file_parsing.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 10:52:20 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/07/20 10:29:33 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/07/24 15:04:22 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-t_exit	parse_line(char *line, t_3d_vector **vectors, int x_counter)
+t_exit	parse_line(char *line, t_fdf **fdf, int x_counter)
 {
-	char		**line_split;
-	char		**line_split_ptr;
-	int			y_counter;
-	t_3d_vector	*new_node;
+	char	**line_split;
+	char	**line_split_ptr;
+	int		y_counter;
+	t_fdf	*new_node;
 
 	line_split = ft_split(line, ' ');
 	line_split_ptr = line_split;
@@ -30,27 +30,27 @@ t_exit	parse_line(char *line, t_3d_vector **vectors, int x_counter)
 		{
 			free_char_array(line_split);
 			free(line);
-			free_vectors(vectors);
+			free_vectors(fdf);
 			return (FAILURE);
 		}
 		line_split_ptr++;
-		ft_lstadd_back(vectors, new_node);
+		ft_lstadd_back(fdf, new_node);
 	}
 	free_char_array(line_split);
 	return (SUCCESS);
 }
 
-t_exit	parse_fdf_file(int fd, t_3d_vector **vectors)
+t_exit	parse_fdf_file(int fd, t_fdf **fdf)
 {
 	char	*line;
 	int		x_counter;
 
-	*vectors = NULL;
+	*fdf = NULL;
 	x_counter = 0;
 	line = get_next_line(fd);
 	while (line)
 	{
-		if (!parse_line(line, vectors, x_counter))
+		if (!parse_line(line, fdf, x_counter))
 			return (FAILURE);
 		x_counter++;
 		free(line);
