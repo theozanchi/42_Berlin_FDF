@@ -6,7 +6,7 @@
 #    By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/12 10:48:22 by tzanchi           #+#    #+#              #
-#    Updated: 2023/07/20 10:30:07 by tzanchi          ###   ########.fr        #
+#    Updated: 2023/07/24 12:16:33 by tzanchi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,10 +41,9 @@ ${LIBFT}:
 				mv ${LIBFT_DIR}/${LIBFT} .
 
 ${MLX42}:
-				@if [ -d ${MLX42_DIR} ]; then \
-				git -C ${MLX42_DIR} pull; \
-				else \
-				git clone git@github.com:codam-coding-college/MLX42.git ${MLX42_DIR}; \
+				@if [ -d ${MLX42_DIR} ]; \
+				then git -C ${MLX42_DIR} pull; \
+				else git clone git@github.com:codam-coding-college/MLX42.git ${MLX42_DIR}; \
 				fi
 				cd ${MLX42_DIR} && \
 				cmake -B build && \

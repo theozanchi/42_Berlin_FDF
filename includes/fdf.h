@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 10:55:44 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/07/20 10:30:22 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/07/24 12:27:25 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@
 # include <math.h>
 # include <fcntl.h>
 # include <unistd.h>
+
+# define ALPHA_ANGLE 35.264
+# define BETA_ANGLE 45
+# define GAMMA_ANGLE 0
 
 typedef enum e_bool
 {
