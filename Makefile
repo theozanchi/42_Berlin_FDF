@@ -6,7 +6,7 @@
 #    By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/12 10:48:22 by tzanchi           #+#    #+#              #
-#    Updated: 2023/07/24 12:47:25 by tzanchi          ###   ########.fr        #
+#    Updated: 2023/07/24 12:53:02 by tzanchi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,7 @@ ${MLX42}:
 				cd ${MLX42_DIR} && \
 				cmake -B build && \
 				cmake --build build -j4
-				cp ${MLX42_DIR}build/${MLX42} .
+				mv ${MLX42_DIR}build/${MLX42} .
 
 ${NAME}:		${OBJS} ${LIBFT}
 				${CC} ${CFLAGS} ${SRCS} -I${HEAD_DIR} ${LIBFT} -o ${NAME}
