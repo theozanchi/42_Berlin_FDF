@@ -1,32 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   projection.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/18 10:53:00 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/07/24 18:55:12 by tzanchi          ###   ########.fr       */
+/*   Created: 2023/07/24 18:42:25 by tzanchi           #+#    #+#             */
+/*   Updated: 2023/07/25 12:01:08 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include "errors.h"
 
-int	main(int argc, char **argv)
+void	project_coordinates(t_fdf **fdf)
 {
-	int		fd;
-	t_fdf	*fdf;
+	t_fdf		*ptr;
+	t_mtx_3x3	alp_mtx;
+	t_mtx_3x3	bet_mtx;
+	t_mtx_3x3	gam_mtx;
 
-	if (!arg_is_valid(argc, argv))
-		return (error(INVALID_ARG_ERR));
-	fd = open(argv[1], O_RDONLY);
-	if (fd < 0)
-		return (error(FILE_READING_ERR));
-	if (!parse_fdf_file(fd, &fdf))
-		return (error(MAP_PARSING_ERR));
-	project_coordinates(&fdf);
-	free_vectors(&fdf);
-	close(fd);
-	return (0);
+	ptr = *fdf;
+	alp_mtx = alpha_rot_mtx(ft_rad(_ALPHA));
+	bet_mtx = beta_rot_mtx(ft_rad(_BETA));
+	gam_mtx = gamma_rot_mtx(ft_rad(_GAMMA));
+	while (ptr)
+	{
+		ptr->proj_data = proj_vect(ptr->data, alp_mtx, bet_mtx, gam_mtx);
+		ptr = ptr->next;
+	}
 }

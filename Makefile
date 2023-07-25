@@ -6,7 +6,7 @@
 #    By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/12 10:48:22 by tzanchi           #+#    #+#              #
-#    Updated: 2023/07/24 12:53:02 by tzanchi          ###   ########.fr        #
+#    Updated: 2023/07/24 18:54:47 by tzanchi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,9 @@ SRC			=	errors.c \
 				file_parsing.c \
 				free.c \
 				main.c \
-				utils_list.c
+				projection.c \
+				utils_list.c \
+				utils_matrix_calc.c
 
 SRCS		=	$(addprefix ${SRCS_DIR}, ${SRC})
 

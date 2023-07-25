@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 19:17:03 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/07/24 15:02:10 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/07/25 11:53:28 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ t_fdf	*ft_lstnew(int x, int y, int z, t_bool end_of_line)
 	new = malloc(sizeof(t_fdf));
 	if (new == NULL)
 		return (NULL);
-	new->data_3d.x = x;
-	new->data_3d.y = y;
-	new->data_3d.z = z;
+	new->data.x = x;
+	new->data.y = y;
+	new->data.z = z;
 	new->end_of_line = end_of_line;
 	new->next = NULL;
 	return (new);
