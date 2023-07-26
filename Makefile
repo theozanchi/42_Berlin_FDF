@@ -6,7 +6,7 @@
 #    By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/12 10:48:22 by tzanchi           #+#    #+#              #
-#    Updated: 2023/07/26 15:54:01 by tzanchi          ###   ########.fr        #
+#    Updated: 2023/07/26 16:30:43 by tzanchi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ HEAD_DIR	=	./includes/
 LIBFT_DIR	=	./libft/
 MLX42_DIR	=	./MLX42/
 
-# Colours and symbols
+# Colours, symbols and utils
 GREEN		=	\033[1;32m
 CYAN		=	\033[1;36m
 YELLOW		=	\033[1;33m
@@ -86,13 +86,13 @@ ${MLX42}:
 
 ${NAME}:		entry_message ${OBJS}
 				@${CC} ${CFLAGS} ${SRCS} -I${HEAD_DIR} ${MLX42_INCL} ${LIBFT} -o ${NAME}
-				@echo "${YELLOW}\nCompilation complete, ${NAME} created at the root of the directory${NC}"
+				@echo "${YELLOW}\nCompilation complete, ${NAME} executable at the root of the directory${NC}"
 
 .c.o:
-				@echo -n "Compiling $(notdir $<)"
-				@${CC} ${CFLAGS} -I${HEAD_DIR} -c $< -o $@
-				@echo "${GREEN} ${TICK}${NC}"
-				
+				echo -n "Compiling $(notdir $<)"; \
+				${CC} ${CFLAGS} -I${HEAD_DIR} -c $< -o $@; \
+				echo "${GREEN} ${TICK}${NC}"; 
+
 clean:
 				@make -sC ${LIBFT_DIR} clean >/dev/null 2>&1
 				@echo "Removing all .o files"
@@ -106,6 +106,6 @@ fclean:			clean
 re:				fclean all
 
 entry_message:
-				@echo "${CYAN}\nCOMPILING $$(echo ${NAME} | tr '[:lower:]' '[:upper:]')\n${NC}${BOLD}${SRC_NR} files to compile:${NC}"
+				@echo "${CYAN}\nCOMPILING $$(echo ${NAME} | tr '[:lower:]' '[:upper:]')\n${NC}${BOLD}Compiling necessary .o files out of ${SRC_NR} .c files in total${NC}"
 
 .PHONY:			all clean fclean re entry_message
