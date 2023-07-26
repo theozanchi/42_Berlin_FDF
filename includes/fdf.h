@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 10:55:44 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/07/26 10:58:49 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/07/26 12:05:18 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 # define _BETA 45
 # define _GAMMA 0
 
-# define WIDTH 256
-# define HEIGHT 256
+# define WIDTH 1080
+# define HEIGHT 607
 
 typedef enum e_bool
 {
