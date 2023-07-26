@@ -6,11 +6,12 @@
 #    By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/12 10:48:22 by tzanchi           #+#    #+#              #
-#    Updated: 2023/07/24 18:54:47 by tzanchi          ###   ########.fr        #
+#    Updated: 2023/07/26 10:58:43 by tzanchi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC			=	cc
+UNAME		=	$(shell uname)
 CFLAGS		=	-Wall -Wextra -Werror -g -fsanitize=address
 NAME		=	fdf
 LIBFT		=	libft.a
@@ -21,13 +22,25 @@ HEAD_DIR	=	./includes/
 LIBFT_DIR	=	./libft/
 MLX42_DIR	=	./MLX42/
 
-SRC			=	errors.c \
+ifeq (${UNAME}, Linux)
+MLX42_INCL	=	${MLX42} -I${MLX42_DIR}include -ldl -lglfw -pthread -lm
+endif
+ifeq (${UNAME}, Darwin)
+MLX42_INCL		=	${MLX42} -I${MLX42_DIR}include -lglfw -framework Cocoa -framework OpenGL -framework IOKit
+endif
+ifeq (${UNAME}, Mysys)
+MLX42_INCL		=	${MLX42} -I${MLX42_DIR}include -lglfw3 -lopengl32 -lgdi32
+endif
+
+SRC			=	_utils_list.c \
+				_utils_matrix_calc.c \
+				bresenham_line_algo.c \
+				errors.c \
 				file_parsing.c \
 				free.c \
 				main.c \
 				projection.c \
-				utils_list.c \
-				utils_matrix_calc.c
+				visualize_map.c
 
 SRCS		=	$(addprefix ${SRCS_DIR}, ${SRC})
 
@@ -57,7 +70,7 @@ ${MLX42}:
 				mv ${MLX42_DIR}build/${MLX42} .
 
 ${NAME}:		${OBJS} ${LIBFT}
-				${CC} ${CFLAGS} ${SRCS} -I${HEAD_DIR} ${LIBFT} -o ${NAME}
+				${CC} ${CFLAGS} ${SRCS} -I${HEAD_DIR} ${MLX42_INCL} ${LIBFT} -o ${NAME}
 
 .c.o:
 				${CC} ${CFLAGS} -I${HEAD_DIR} -c $< -o $@

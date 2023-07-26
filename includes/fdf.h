@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 10:55:44 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/07/25 12:00:31 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/07/26 10:58:49 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@
 # define _ALPHA 35.264
 # define _BETA 45
 # define _GAMMA 0
+
+# define WIDTH 256
+# define HEIGHT 256
 
 typedef enum e_bool
 {
@@ -64,6 +67,20 @@ typedef struct s_fdf
 	struct s_fdf	*next;
 }	t_fdf;
 
+/*_utils_list*/
+t_fdf		*ft_lstnew(int x, int y, int z, t_bool end_of_line);
+void		ft_lstadd_back(t_fdf **lst, t_fdf *new);
+
+/*_utils_matrix_calc*/
+t_vect_3	matrix_vector_mult(t_mtx_3x3 matrix, t_vect_3 vector);
+t_mtx_3x3	alpha_rot_mtx(float theta);
+t_mtx_3x3	beta_rot_mtx(float theta);
+t_mtx_3x3	gamma_rot_mtx(float theta);
+t_vect_3	proj_vect(t_vect_3 v, t_mtx_3x3 alp, t_mtx_3x3 bet, t_mtx_3x3 gam);
+
+/*bresenham_line_algo*/
+void		plot_line(t_vect_3 a, t_vect_3 b, mlx_image_t *img);
+
 /*errors*/
 t_bool		arg_is_valid(int argc, char **argv);
 int			error(char *s);
@@ -82,15 +99,7 @@ int			main(int argc, char **argv);
 /*projection*/
 void		project_coordinates(t_fdf **fdf);
 
-/*utils_list*/
-t_fdf		*ft_lstnew(int x, int y, int z, t_bool end_of_line);
-void		ft_lstadd_back(t_fdf **lst, t_fdf *new);
-
-/*utils_matrix_calc*/
-t_vect_3	matrix_vector_mult(t_mtx_3x3 matrix, t_vect_3 vector);
-t_mtx_3x3	alpha_rot_mtx(float theta);
-t_mtx_3x3	beta_rot_mtx(float theta);
-t_mtx_3x3	gamma_rot_mtx(float theta);
-t_vect_3	proj_vect(t_vect_3 v, t_mtx_3x3 alp, t_mtx_3x3 bet, t_mtx_3x3 gam);
+/*visualize_map*/
+void		visualize_map(t_fdf **fdf, mlx_image_t *img);
 
 #endif

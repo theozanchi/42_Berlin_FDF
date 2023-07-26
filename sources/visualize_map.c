@@ -1,31 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   projection.c                                       :+:      :+:    :+:   */
+/*   visualize_map.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/24 18:42:25 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/07/25 16:22:50 by tzanchi          ###   ########.fr       */
+/*   Created: 2023/07/25 17:11:34 by tzanchi           #+#    #+#             */
+/*   Updated: 2023/07/26 11:00:18 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	project_coordinates(t_fdf **fdf)
+void	visualize_map(t_fdf **fdf, mlx_image_t *img)
 {
-	t_fdf		*ptr;
-	t_mtx_3x3	alp_mtx;
-	t_mtx_3x3	bet_mtx;
-	t_mtx_3x3	gam_mtx;
+	t_fdf	*ptr;
 
 	ptr = *fdf;
-	alp_mtx = alpha_rot_mtx(ft_rad(_ALPHA));
-	bet_mtx = beta_rot_mtx(ft_rad(_BETA));
-	gam_mtx = gamma_rot_mtx(ft_rad(_GAMMA));
-	while (ptr)
+	while (!ptr->end_of_line)
 	{
-		ptr->proj_data = proj_vect(ptr->data, alp_mtx, bet_mtx, gam_mtx);
+		plot_line(ptr->proj_data, ptr->next->proj_data, img);
 		ptr = ptr->next;
 	}
 }

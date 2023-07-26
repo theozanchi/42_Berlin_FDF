@@ -1,31 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   projection.c                                       :+:      :+:    :+:   */
+/*   bresenham_line_algo.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/24 18:42:25 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/07/25 16:22:50 by tzanchi          ###   ########.fr       */
+/*   Created: 2023/07/25 16:37:59 by tzanchi           #+#    #+#             */
+/*   Updated: 2023/07/26 10:58:22 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	project_coordinates(t_fdf **fdf)
+void	plot_line(t_vect_3 a, t_vect_3 b, mlx_image_t *img)
 {
-	t_fdf		*ptr;
-	t_mtx_3x3	alp_mtx;
-	t_mtx_3x3	bet_mtx;
-	t_mtx_3x3	gam_mtx;
+	int	delta_x;
+	int	delta_y;
+	int	p;
+	int	x;
+	int	y;
 
-	ptr = *fdf;
-	alp_mtx = alpha_rot_mtx(ft_rad(_ALPHA));
-	bet_mtx = beta_rot_mtx(ft_rad(_BETA));
-	gam_mtx = gamma_rot_mtx(ft_rad(_GAMMA));
-	while (ptr)
+	delta_x = b.x - a.x;
+	delta_y = b.y - a.y;
+	x = a.x;
+	y = a.y;
+	p = 2 * delta_y - delta_x;
+	while (x < b.x)
 	{
-		ptr->proj_data = proj_vect(ptr->data, alp_mtx, bet_mtx, gam_mtx);
-		ptr = ptr->next;
+		mlx_put_pixel(img, x, y, 255);
+		if (p >= 0)
+		{
+			y++;
+			p += 2 * delta_y - 2 * delta_x;
+		}
+		else
+			p += 2 * delta_y;
+		x++;
 	}
 }
