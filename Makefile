@@ -6,7 +6,7 @@
 #    By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/12 10:48:22 by tzanchi           #+#    #+#              #
-#    Updated: 2023/07/26 18:36:17 by tzanchi          ###   ########.fr        #
+#    Updated: 2023/07/26 19:47:04 by tzanchi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ SRCS_DIR	=	./sources/
 HEAD_DIR	=	./includes/
 LIBFT_DIR	=	./libft/
 MLX42_DIR	=	./MLX42/
+OBJ_DIR		=	${SRCS_DIR}.o
 
 # Colours, symbols and utils
 GREEN		=	\033[1;32m
@@ -56,9 +57,9 @@ SRC			=	_utils_list.c \
 SRCS		=	$(addprefix ${SRCS_DIR}, ${SRC})
 SRC_NR		=	$(words ${SRCS})
 
-OBJS		=	${SRCS:.c=.o}
+OBJS		=	$(addprefix ${OBJ_DIR}/, $(notdir $(SRCS:.c=.o)))
 
-all:			project_logo
+all:			project_logo ${OBJ_DIR}
 				@make -s ${LIBFT}
 				@make -s ${MLX42}
 				@make -s ${NAME}
@@ -89,15 +90,25 @@ ${NAME}:		entry_message ${OBJS}
 				@${CC} ${CFLAGS} ${SRCS} -I${HEAD_DIR} ${MLX42_INCL} ${LIBFT} -o ${NAME}
 				@echo "${YELLOW}\nCompilation complete, ${NAME} executable at the root of the directory${NC}\n"
 
-.c.o:
-				echo -n "Compiling $(notdir $<)"; \
+${OBJ_DIR}:
+				@if [ ! -d "${OBJ_DIR}" ]; \
+				then mkdir -p "${OBJ_DIR}"; \
+				fi
+
+$(OBJ_DIR)/%.o:	$(SRCS_DIR)%.c
+				@echo -n "Compiling $(notdir $<)"; \
 				${CC} ${CFLAGS} -I${HEAD_DIR} -c $< -o $@; \
 				echo "${GREEN} ${TICK}${NC}"; 
 
 clean:
 				@make -sC ${LIBFT_DIR} clean >/dev/null 2>&1
-				@echo "Removing all .o files"
-				@rm -f ${OBJS}
+				@if [ ! -d "${OBJ_DIR}" ]; \
+				then \
+					echo "Repo already clean"; \
+				else \
+					echo "Removing all .o files"; \
+					rm -r ${OBJ_DIR}; \
+				fi
 
 fclean:			clean
 				@make -sC ${LIBFT_DIR} fclean >/dev/null 2>&1
