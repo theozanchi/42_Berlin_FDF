@@ -6,7 +6,7 @@
 #    By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/12 10:48:22 by tzanchi           #+#    #+#              #
-#    Updated: 2023/07/26 15:08:45 by tzanchi          ###   ########.fr        #
+#    Updated: 2023/07/26 15:41:07 by tzanchi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,9 @@ MLX42_DIR	=	./MLX42/
 # Colours and symbols
 GREEN		=	\033[1;32m
 CYAN		=	\033[1;36m
+YELLOW		=	\033[1;33m
 NC			=	\033[0m
+BOLD		=	\033[1m
 TICK		=	✓
 
 ifeq (${UNAME}, Linux)
@@ -56,9 +58,9 @@ SRC_NR		=	$(words ${SRCS})
 OBJS		=	${SRCS:.c=.o}
 
 all:			
-				@make ${LIBFT}
-				@make ${MLX42}
-				@make ${NAME}
+				@make -s ${LIBFT}
+				@make -s ${MLX42}
+				@make -s ${NAME}
 
 ${LIBFT}:
 				@echo "${CYAN}\nCOMPILING $$(echo ${LIBFT} | tr '[:lower:]' '[:upper:]')${NC}"
@@ -67,7 +69,8 @@ ${LIBFT}:
 				else git clone git@github.com:theozanchi/42_Berlin_libft.git ${LIBFT_DIR}; \
 				fi
 				make -C ${LIBFT_DIR}
-				mv ${LIBFT_DIR}/${LIBFT} .
+				@echo "${YELLOW}Moving ${LIBFT} at the root of the repository${NC}"
+				@mv ${LIBFT_DIR}/${LIBFT} .
 
 ${MLX42}:
 				@echo "${CYAN}\nCOMPILING $$(echo ${MLX42} | tr '[:lower:]' '[:upper:]')${NC}"
@@ -78,7 +81,8 @@ ${MLX42}:
 				cd ${MLX42_DIR} && \
 				cmake -B build && \
 				cmake --build build -j4
-				mv ${MLX42_DIR}build/${MLX42} .
+				@echo "${YELLOW}Moving ${MLX42} at the root of the repository${NC}"
+				@mv ${MLX42_DIR}build/${MLX42} .
 
 ${NAME}:		entry_message ${OBJS}
 				@${CC} ${CFLAGS} ${SRCS} -I${HEAD_DIR} ${MLX42_INCL} ${LIBFT} -o ${NAME}
@@ -90,18 +94,18 @@ ${NAME}:		entry_message ${OBJS}
 				@echo "${GREEN} ${TICK}${NC}"
 				
 clean:
-				@make -C ${LIBFT_DIR} clean
+				@make -sC ${LIBFT_DIR} clean >/dev/null 2>&1
 				@echo "Removing all .o files"
 				@rm -f ${OBJS}
 
 fclean:			clean
-				@make -C ${LIBFT_DIR} fclean
+				@make -sC ${LIBFT_DIR} fclean >/dev/null 2>&1
 				@echo "Removing ${NAME} ${LIBFT} and ${MLX42} files from root"
 				@rm -f ${NAME} ${LIBFT} ${MLX42}
 
 re:				fclean all
 
 entry_message:
-				@echo "${CYAN}\nCOMPILING $$(echo ${NAME} | tr '[:lower:]' '[:upper:]'): ${NC}${SRC_NR} files to compile"
+				@echo "${CYAN}\nCOMPILING $$(echo ${NAME} | tr '[:lower:]' '[:upper:]')\n${NC}${BOLD}${SRC_NR} files to compile:${NC}"
 
 .PHONY:			all clean fclean re entry_message
