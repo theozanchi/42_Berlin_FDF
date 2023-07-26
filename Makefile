@@ -6,7 +6,7 @@
 #    By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/12 10:48:22 by tzanchi           #+#    #+#              #
-#    Updated: 2023/07/26 18:25:40 by tzanchi          ###   ########.fr        #
+#    Updated: 2023/07/26 18:36:17 by tzanchi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -87,7 +87,7 @@ ${MLX42}:
 
 ${NAME}:		entry_message ${OBJS}
 				@${CC} ${CFLAGS} ${SRCS} -I${HEAD_DIR} ${MLX42_INCL} ${LIBFT} -o ${NAME}
-				@echo "${YELLOW}\nCompilation complete, ${NAME} executable at the root of the directory${NC}"
+				@echo "${YELLOW}\nCompilation complete, ${NAME} executable at the root of the directory${NC}\n"
 
 .c.o:
 				echo -n "Compiling $(notdir $<)"; \
