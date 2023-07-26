@@ -6,7 +6,7 @@
 #    By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/12 10:48:22 by tzanchi           #+#    #+#              #
-#    Updated: 2023/07/26 16:30:43 by tzanchi          ###   ########.fr        #
+#    Updated: 2023/07/26 18:25:40 by tzanchi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ MLX42_DIR	=	./MLX42/
 GREEN		=	\033[1;32m
 CYAN		=	\033[1;36m
 YELLOW		=	\033[1;33m
+RED			=	\033[1;31m
 NC			=	\033[0m
 BOLD		=	\033[1m
 TICK		=	✓
@@ -57,7 +58,7 @@ SRC_NR		=	$(words ${SRCS})
 
 OBJS		=	${SRCS:.c=.o}
 
-all:			
+all:			project_logo
 				@make -s ${LIBFT}
 				@make -s ${MLX42}
 				@make -s ${NAME}
@@ -105,7 +106,10 @@ fclean:			clean
 
 re:				fclean all
 
+project_logo:
+				@echo "${RED}   _     _     _  \n  / \   / \   / \ \n ( ${CYAN}F${RED} ) ( ${CYAN}D${RED} ) ( ${CYAN}F${RED} )\n  \_/   \_/   \_/ \n\n   ${NC}a 42 project by Théo Zanchi"
+
 entry_message:
 				@echo "${CYAN}\nCOMPILING $$(echo ${NAME} | tr '[:lower:]' '[:upper:]')\n${NC}${BOLD}Compiling necessary .o files out of ${SRC_NR} .c files in total${NC}"
 
-.PHONY:			all clean fclean re entry_message
+.PHONY:			all clean fclean re project_logo entry_message

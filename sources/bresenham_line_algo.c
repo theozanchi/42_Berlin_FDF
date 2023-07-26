@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 16:37:59 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/07/26 10:58:22 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/07/26 18:07:31 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ void	plot_line(t_vect_3 a, t_vect_3 b, mlx_image_t *img)
 	p = 2 * delta_y - delta_x;
 	while (x < b.x)
 	{
-		mlx_put_pixel(img, x, y, 255);
+		if (x > 0 && x <= HEIGHT && y > 0 && y <= WIDTH)
+			mlx_put_pixel(img, x, y, 255);
 		if (p >= 0)
 		{
 			y++;
