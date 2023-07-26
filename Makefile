@@ -6,7 +6,7 @@
 #    By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/12 10:48:22 by tzanchi           #+#    #+#              #
-#    Updated: 2023/07/26 15:41:07 by tzanchi          ###   ########.fr        #
+#    Updated: 2023/07/26 15:54:01 by tzanchi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -86,7 +86,7 @@ ${MLX42}:
 
 ${NAME}:		entry_message ${OBJS}
 				@${CC} ${CFLAGS} ${SRCS} -I${HEAD_DIR} ${MLX42_INCL} ${LIBFT} -o ${NAME}
-				@echo "${GREEN}\nCompilation complete, ${NAME} created at the root of the directory${NC}"
+				@echo "${YELLOW}\nCompilation complete, ${NAME} created at the root of the directory${NC}"
 
 .c.o:
 				@echo -n "Compiling $(notdir $<)"
