@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 10:55:44 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/07/26 12:05:18 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/07/27 12:45:17 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,8 @@ int			main(int argc, char **argv);
 void		project_coordinates(t_fdf **fdf);
 
 /*visualize_map*/
+int			get_x_max(t_fdf **fdf);
+void		resize_map(t_fdf **fdf);
 void		visualize_map(t_fdf **fdf, mlx_image_t *img);
 
 #endif

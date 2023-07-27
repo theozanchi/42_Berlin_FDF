@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 10:53:00 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/07/26 10:49:19 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/07/27 12:45:27 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	main(int argc, char **argv)
 	if (!img || mlx_image_to_window(mlx, img, 0, 0) < 0)
 		return (error(IMG_INIT_ERR));
 	project_coordinates(&fdf);
+	resize_map(&fdf);
 	visualize_map(&fdf, img);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
