@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 10:55:44 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/07/27 12:45:17 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/07/27 18:38:11 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,8 @@ t_mtx_3x3	gamma_rot_mtx(float theta);
 t_vect_3	proj_vect(t_vect_3 v, t_mtx_3x3 alp, t_mtx_3x3 bet, t_mtx_3x3 gam);
 
 /*bresenham_line_algo*/
-void		plot_line(t_vect_3 a, t_vect_3 b, mlx_image_t *img);
+void		put_dot(mlx_image_t *img, int x, int y, uint32_t color, int thickness);
+void		plot_line(t_vect_3 a, t_vect_3 b, mlx_image_t *img, int thickness);
 
 /*errors*/
 t_bool		arg_is_valid(int argc, char **argv);
@@ -100,7 +101,8 @@ int			main(int argc, char **argv);
 void		project_coordinates(t_fdf **fdf);
 
 /*visualize_map*/
-int			get_x_max(t_fdf **fdf);
+int			get_line_length(t_fdf **fdf);
+float		get_x_max(t_fdf **fdf);
 void		resize_map(t_fdf **fdf);
 void		visualize_map(t_fdf **fdf, mlx_image_t *img);
 
