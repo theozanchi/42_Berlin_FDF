@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 10:53:00 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/07/27 18:37:58 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/08/01 10:56:35 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	main(int argc, char **argv)
 		return (error(IMG_INIT_ERR));
 	project_coordinates(&fdf);
 	resize_map(&fdf);
-	gpt_visualize_map(&fdf, img);
+	visualize_map(&fdf, img);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
 	free_vectors(&fdf);
