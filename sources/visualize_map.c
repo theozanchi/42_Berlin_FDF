@@ -6,11 +6,22 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 17:11:34 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/07/27 18:38:20 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/08/01 18:14:23 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+t_bool	is_last_line(t_fdf *fdf, int line_length)
+{
+	while (line_length--)
+	{
+		if (!fdf->next)
+			return (TRUE);
+		fdf = fdf->next;
+	}
+	return (FALSE);
+}
 
 int	get_line_length(t_fdf **fdf)
 {
@@ -24,7 +35,7 @@ int	get_line_length(t_fdf **fdf)
 		length++;
 		ptr = ptr->next;
 	}
-	return (length);
+	return (length + 1);
 }
 
 float	get_x_max(t_fdf **fdf)
@@ -63,26 +74,17 @@ void	resize_map(t_fdf **fdf)
 void	visualize_map(t_fdf **fdf, mlx_image_t *img)
 {
 	t_fdf	*ptr;
-	t_fdf	*next_line_start;
-	int		line_length;
+	int		line_len;
 
 	ptr = *fdf;
-	next_line_start = ptr;
-	line_length = get_line_length(fdf);
+	line_len = get_line_length(fdf);
 	while (ptr)
 	{
-		while (ptr && !ptr->end_of_line)
-		{
-			plot_line(ptr->proj_data, ptr->next->proj_data, img, 2);
-			ptr = ptr->next;
-		}
-		if (next_line_start)
-		{
-			while (next_line_start && next_line_start->end_of_line)
-				next_line_start = next_line_start->next;
-			ptr = next_line_start;
-			if (ptr)
-				next_line_start = ptr->next;
-		}
+		if (!ptr->end_of_line)
+			plot_line(ptr->proj_data, ptr->next->proj_data, img, 2, 0xFF0000FF);
+		if (!is_last_line(ptr, line_len))
+			plot_line(ptr->proj_data, get_nth_node(ptr, line_len)->proj_data,
+				img, 2, 0x00FF00FF);
+		ptr = ptr->next;
 	}
 }

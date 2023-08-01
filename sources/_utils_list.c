@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_list.c                                       :+:      :+:    :+:   */
+/*   _utils_list.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 19:17:03 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/07/25 11:53:28 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/08/01 17:11:15 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,18 @@ void	ft_lstadd_back(t_fdf **lst, t_fdf *new)
 			ptr = ptr->next;
 		ptr->next = new;
 	}
+}
+
+t_fdf	*get_nth_node(t_fdf *ptr, int n)
+{
+	t_fdf	*node;
+
+	node = ptr;
+	while (n--)
+	{
+		if (!node->next)
+			return (NULL);
+		node = node->next;
+	}
+	return (node);
 }

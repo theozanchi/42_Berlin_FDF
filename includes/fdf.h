@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 10:55:44 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/07/27 18:38:11 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/08/01 18:15:23 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ typedef struct s_fdf
 /*_utils_list*/
 t_fdf		*ft_lstnew(int x, int y, int z, t_bool end_of_line);
 void		ft_lstadd_back(t_fdf **lst, t_fdf *new);
+t_fdf		*get_nth_node(t_fdf *ptr, int n);
 
 /*_utils_matrix_calc*/
 t_vect_3	matrix_vector_mult(t_mtx_3x3 matrix, t_vect_3 vector);
@@ -80,7 +81,7 @@ t_vect_3	proj_vect(t_vect_3 v, t_mtx_3x3 alp, t_mtx_3x3 bet, t_mtx_3x3 gam);
 
 /*bresenham_line_algo*/
 void		put_dot(mlx_image_t *img, int x, int y, uint32_t color, int thickness);
-void		plot_line(t_vect_3 a, t_vect_3 b, mlx_image_t *img, int thickness);
+void		plot_line(t_vect_3 a, t_vect_3 b, mlx_image_t *img, int thickness, int colour);
 
 /*errors*/
 t_bool		arg_is_valid(int argc, char **argv);
