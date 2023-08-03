@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 16:37:59 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/08/03 13:09:18 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/08/03 16:02:39 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,9 @@ void	plot(t_vect_3 a, t_vect_3 b, mlx_image_t *img, int thick, int colour)
 	t_br_utils	ut;
 
 	init_bresenham_utils(&ut, a, b);
-	if (ut.delta_y == 0)
+	if (ut.delta_x == 0 && ut.delta_y == 0)
+		put_dot(img, (int)ut.x0, (int)ut.y0, colour, thick);
+	else if (ut.delta_y == 0)
 		horizontal(ut, img, thick, colour);
 	else if (ut.delta_x == 0)
 		vertical(ut, img, thick, colour);
