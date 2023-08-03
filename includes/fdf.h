@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 10:55:44 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/08/03 12:55:13 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/08/03 17:54:38 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,15 +69,15 @@ typedef struct s_fdf
 
 typedef struct s_br_utils
 {
-	float	delta_x;
-	float	delta_y;
-	int		p;
-	int		step_x;
-	int		step_y;
-	float	x0;
-	float	y0;
-	float	x1;
-	float	y1;
+	int	delta_x;
+	int	delta_y;
+	int	p;
+	int	step_x;
+	int	step_y;
+	int	x0;
+	int	y0;
+	int	x1;
+	int	y1;
 }	t_br_utils;
 
 /*_utils_list*/

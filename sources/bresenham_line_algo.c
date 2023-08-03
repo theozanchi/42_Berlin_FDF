@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 16:37:59 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/08/03 16:02:39 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/08/03 17:54:02 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	plot(t_vect_3 a, t_vect_3 b, mlx_image_t *img, int thick, int colour)
 
 	init_bresenham_utils(&ut, a, b);
 	if (ut.delta_x == 0 && ut.delta_y == 0)
-		put_dot(img, (int)ut.x0, (int)ut.y0, colour, thick);
+		mlx_put_pixel(img, (int)ut.x0, (int)ut.y0, colour);
 	else if (ut.delta_y == 0)
 		horizontal(ut, img, thick, colour);
 	else if (ut.delta_x == 0)
@@ -91,7 +91,7 @@ void	plot(t_vect_3 a, t_vect_3 b, mlx_image_t *img, int thick, int colour)
 		while (ut.x0 != ut.x1)
 		{
 			if (ut.x0 >= 0 && ut.x0 < WIDTH && ut.y0 >= 0 && ut.y0 <= HEIGTH)
-				put_dot(img, (int)ut.x0, (int)ut.y0, colour, thick);
+				mlx_put_pixel(img, (int)ut.x0, (int)ut.y0, colour);
 			if (ut.p >= 0)
 			{
 				ut.y0 += ut.step_y;
