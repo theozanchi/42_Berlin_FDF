@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 16:37:59 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/08/01 18:13:15 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/08/03 13:09:18 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ void	put_dot(mlx_image_t *img, int x, int y, uint32_t color, int thickness)
 		{
 			plot_x = x + i;
 			plot_y = y + j;
-			if (plot_x >= 0 && plot_x < WIDTH && plot_y >= 0 && plot_y < HEIGHT)
+			if (plot_x >= 0 && plot_x <= WIDTH
+				&& plot_y >= 0 && plot_y <= HEIGTH)
 				mlx_put_pixel(img, plot_x, plot_y, color);
 			j++;
 		}
@@ -35,40 +36,68 @@ void	put_dot(mlx_image_t *img, int x, int y, uint32_t color, int thickness)
 	}
 }
 
-void	plot_line(t_vect_3 a, t_vect_3 b, mlx_image_t *img, int thickness, int colour)
+void	init_bresenham_utils(t_br_utils *ut, t_vect_3 a, t_vect_3 b)
 {
-	float	delta_x;
-	float	delta_y;
-	float	p;
-	float	x;
-	float	y;
+	ut->delta_x = fabs(b.x - a.x);
+	ut->delta_y = fabs(b.y - a.y);
+	ut->p = 2 * ut->delta_y - ut->delta_x;
+	if (b.x >= a.x)
+		ut->step_x = 1;
+	else
+		ut->step_x = -1;
+	if (b.y >= a.y)
+		ut->step_y = 1;
+	else
+		ut->step_y = -1;
+	ut->x0 = a.x;
+	ut->y0 = a.y;
+	ut->x1 = b.x;
+	ut->y1 = b.y;
+}
 
-	delta_x = fabs(b.x - a.x);
-	delta_y = fabs(b.y - a.y);
-	x = a.x;
-	y = a.y;
-	p = 2 * delta_y - delta_x;
-	if (delta_y == 0)
+void	horizontal(t_br_utils ut, mlx_image_t *img, int thick, int colour)
+{
+	while (ut.x0 != ut.x1)
 	{
-		while (x <= b.x)
-		{
-			if (x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT)
-				put_dot(img, x, y, colour, thickness);
-			x++;
-		}
-		return ;
+		if (ut.x0 >= 0 && ut.x0 <= WIDTH && ut.y0 >= 0 && ut.y0 <= HEIGTH)
+			put_dot(img, (int)ut.x0, (int)ut.y0, colour, thick);
+		ut.x0 += ut.step_x;
 	}
-	while (x <= b.x)
+}
+
+void	vertical(t_br_utils ut, mlx_image_t *img, int thick, int colour)
+{
+	while (ut.y0 != ut.y1)
 	{
-		if (x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT)
-			put_dot(img, x, y, colour, thickness);
-		if (p >= 0)
+		if (ut.x0 >= 0 && ut.x0 <= WIDTH && ut.y0 >= 0 && ut.y0 <= HEIGTH)
+			put_dot(img, (int)ut.x0, (int)ut.y0, colour, thick);
+		ut.y0 += ut.step_y;
+	}
+}
+
+void	plot(t_vect_3 a, t_vect_3 b, mlx_image_t *img, int thick, int colour)
+{
+	t_br_utils	ut;
+
+	init_bresenham_utils(&ut, a, b);
+	if (ut.delta_y == 0)
+		horizontal(ut, img, thick, colour);
+	else if (ut.delta_x == 0)
+		vertical(ut, img, thick, colour);
+	else
+	{
+		while (ut.x0 != ut.x1)
 		{
-			y++;
-			p += 2 * delta_y - 2 * delta_x;
+			if (ut.x0 >= 0 && ut.x0 < WIDTH && ut.y0 >= 0 && ut.y0 <= HEIGTH)
+				put_dot(img, (int)ut.x0, (int)ut.y0, colour, thick);
+			if (ut.p >= 0)
+			{
+				ut.y0 += ut.step_y;
+				ut.p += 2 * ut.delta_y - 2 * ut.delta_x;
+			}
+			else
+				ut.p += 2 * ut.delta_y;
+			ut.x0 += ut.step_x;
 		}
-		else
-			p += 2 * delta_y;
-		x++;
 	}
 }

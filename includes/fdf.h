@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 10:55:44 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/08/01 18:15:23 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/08/03 12:55:13 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define _GAMMA 0
 
 # define WIDTH 1080
-# define HEIGHT 607
+# define HEIGTH 607
 
 typedef enum e_bool
 {
@@ -67,6 +67,19 @@ typedef struct s_fdf
 	struct s_fdf	*next;
 }	t_fdf;
 
+typedef struct s_br_utils
+{
+	float	delta_x;
+	float	delta_y;
+	int		p;
+	int		step_x;
+	int		step_y;
+	float	x0;
+	float	y0;
+	float	x1;
+	float	y1;
+}	t_br_utils;
+
 /*_utils_list*/
 t_fdf		*ft_lstnew(int x, int y, int z, t_bool end_of_line);
 void		ft_lstadd_back(t_fdf **lst, t_fdf *new);
@@ -81,7 +94,7 @@ t_vect_3	proj_vect(t_vect_3 v, t_mtx_3x3 alp, t_mtx_3x3 bet, t_mtx_3x3 gam);
 
 /*bresenham_line_algo*/
 void		put_dot(mlx_image_t *img, int x, int y, uint32_t color, int thickness);
-void		plot_line(t_vect_3 a, t_vect_3 b, mlx_image_t *img, int thickness, int colour);
+void		plot(t_vect_3 a, t_vect_3 b, mlx_image_t *img, int thick, int colour);
 
 /*errors*/
 t_bool		arg_is_valid(int argc, char **argv);

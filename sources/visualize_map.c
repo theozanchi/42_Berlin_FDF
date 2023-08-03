@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 17:11:34 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/08/01 18:14:23 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/08/02 13:56:29 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	resize_map(t_fdf **fdf)
 
 	ptr = *fdf;
 	x_transformation_ratio = (float)WIDTH / get_x_max(fdf);
-	y_transformation_ratio = (float)HEIGHT / (float)WIDTH * x_transformation_ratio;
+	y_transformation_ratio = (float)HEIGTH / (float)WIDTH * x_transformation_ratio;
 	while (ptr)
 	{
 		ptr->proj_data.x *= x_transformation_ratio;
@@ -81,9 +81,9 @@ void	visualize_map(t_fdf **fdf, mlx_image_t *img)
 	while (ptr)
 	{
 		if (!ptr->end_of_line)
-			plot_line(ptr->proj_data, ptr->next->proj_data, img, 2, 0xFF0000FF);
+			plot(ptr->proj_data, ptr->next->proj_data, img, 2, 0xFF0000FF);
 		if (!is_last_line(ptr, line_len))
-			plot_line(ptr->proj_data, get_nth_node(ptr, line_len)->proj_data,
+			plot(ptr->proj_data, get_nth_node(ptr, line_len)->proj_data,
 				img, 2, 0x00FF00FF);
 		ptr = ptr->next;
 	}
