@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 10:55:44 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/08/03 17:54:38 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/08/04 16:12:30 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,21 +69,32 @@ typedef struct s_fdf
 
 typedef struct s_br_utils
 {
+	int	x0;
+	int	y0;
+	int	x1;
+	int	y1;
 	int	delta_x;
 	int	delta_y;
 	int	p;
 	int	step_x;
 	int	step_y;
-	int	x0;
-	int	y0;
-	int	x1;
-	int	y1;
 }	t_br_utils;
+
+typedef struct s_extrema
+{
+	float	x_min;
+	float	x_max;
+	float	y_min;
+	float	y_max;
+}	t_extrema;
 
 /*_utils_list*/
 t_fdf		*ft_lstnew(int x, int y, int z, t_bool end_of_line);
 void		ft_lstadd_back(t_fdf **lst, t_fdf *new);
 t_fdf		*get_nth_node(t_fdf *ptr, int n);
+t_bool		is_last_line(t_fdf *fdf, int line_length);
+int			get_line_length(t_fdf **fdf);
+t_extrema	get_extrema(t_fdf **fdf);
 
 /*_utils_matrix_calc*/
 t_vect_3	matrix_vector_mult(t_mtx_3x3 matrix, t_vect_3 vector);
@@ -93,8 +104,10 @@ t_mtx_3x3	gamma_rot_mtx(float theta);
 t_vect_3	proj_vect(t_vect_3 v, t_mtx_3x3 alp, t_mtx_3x3 bet, t_mtx_3x3 gam);
 
 /*bresenham_line_algo*/
-void		put_dot(mlx_image_t *img, int x, int y, uint32_t color, int thickness);
-void		plot(t_vect_3 a, t_vect_3 b, mlx_image_t *img, int thick, int colour);
+void		init_bresenham_utils(t_br_utils *ut, t_vect_3 a, t_vect_3 b);
+void		horizontal(t_br_utils ut, mlx_image_t *img, int colour);
+void		vertical(t_br_utils ut, mlx_image_t *img, int colour);
+void		plot(t_vect_3 a, t_vect_3 b, mlx_image_t *img, int colour);
 
 /*errors*/
 t_bool		arg_is_valid(int argc, char **argv);
@@ -115,8 +128,7 @@ int			main(int argc, char **argv);
 void		project_coordinates(t_fdf **fdf);
 
 /*visualize_map*/
-int			get_line_length(t_fdf **fdf);
-float		get_x_max(t_fdf **fdf);
+void		new_resize_map(t_fdf **fdf);
 void		resize_map(t_fdf **fdf);
 void		visualize_map(t_fdf **fdf, mlx_image_t *img);
 
