@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 17:11:34 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/08/04 17:06:57 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/08/04 17:21:35 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	move_map_to_frame(t_fdf **fdf, t_extrema *extrema)
 	}
 }
 
+/**/
 void	new_resize_map(t_fdf **fdf)
 {
 	t_fdf		*ptr;
@@ -42,6 +43,7 @@ void	new_resize_map(t_fdf **fdf)
 	ptr = *fdf;
 	extrema = get_extrema(fdf);
 	move_map_to_frame(fdf, &extrema);
+	extrema = get_extrema(fdf);
 	x_transf_ratio = (float)WIDTH / extrema.x_max;
 	y_transf_ratio = (float)HEIGTH / extrema.y_max;
 	if (x_transf_ratio < y_transf_ratio)

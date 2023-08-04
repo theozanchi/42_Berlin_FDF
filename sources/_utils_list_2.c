@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 16:05:11 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/08/04 16:18:58 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/08/04 17:20:55 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,10 @@ t_extrema	get_extrema(t_fdf **fdf)
 	t_extrema	output;
 	t_fdf		*ptr;
 
-	output.x_min = 0;
-	output.x_max = 0;
-	output.y_min = 0;
-	output.y_max = 0;
+	output.x_min = (float)INT_MAX;
+	output.x_max = (float)INT_MIN;
+	output.y_min = (float)INT_MAX;
+	output.y_max = (float)INT_MIN;
 	ptr = *fdf;
 	while (ptr)
 	{
