@@ -6,7 +6,7 @@
 #    By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/12 10:48:22 by tzanchi           #+#    #+#              #
-#    Updated: 2023/07/27 18:14:12 by tzanchi          ###   ########.fr        #
+#    Updated: 2023/08/04 16:22:49 by tzanchi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,8 @@ ifeq (${UNAME}, Mysys)
 MLX42_INCL		=	${MLX42} -I${MLX42_DIR}include -lglfw3 -lopengl32 -lgdi32
 endif
 
-SRC			=	_utils_list.c \
+SRC			=	_utils_list_1.c \
+				_utils_list_2.c \
 				_utils_matrix_calc.c \
 				bresenham_line_algo.c \
 				errors.c \
