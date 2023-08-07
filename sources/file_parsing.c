@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 10:52:20 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/08/04 15:41:15 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/08/07 12:04:23 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,19 @@
 file (separated by ' ') and adding it at the back of the t_fdf linked list
 pointed at by 'fdf'
 In case of failure, the list is freed and set to NULL*/
-t_exit	parse_line(char *line, t_fdf **fdf, int x_counter)
+t_exit	parse_line(char *line, t_fdf **fdf, int y_counter)
 {
 	char	**line_split;
 	char	**line_split_ptr;
-	int		y_counter;
+	int		x_counter;
 	t_fdf	*new_node;
 
 	line_split = ft_split(line, ' ');
 	line_split_ptr = line_split;
-	y_counter = 0;
+	x_counter = 0;
 	while (*line_split_ptr)
 	{
-		new_node = ft_lstnew(x_counter, y_counter++,
+		new_node = ft_lstnew(x_counter++, y_counter,
 				ft_atoi(*line_split_ptr), *(line_split_ptr + 1) == NULL);
 		if (!new_node)
 		{
@@ -51,16 +51,16 @@ all 3 (x, y, z) coordinates of each point*/
 t_exit	parse_fdf_file(int fd, t_fdf **fdf)
 {
 	char	*line;
-	int		x_counter;
+	int		y_counter;
 
 	*fdf = NULL;
-	x_counter = 0;
+	y_counter = 0;
 	line = get_next_line(fd);
 	while (line)
 	{
-		if (!parse_line(line, fdf, x_counter))
+		if (!parse_line(line, fdf, y_counter))
 			return (FAILURE);
-		x_counter++;
+		y_counter++;
 		free(line);
 		line = get_next_line(fd);
 	}

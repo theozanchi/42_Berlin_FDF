@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 17:11:34 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/08/04 17:21:35 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/08/07 15:49:24 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	move_map_to_frame(t_fdf **fdf, t_extrema *extrema)
 	t_fdf	*ptr;
 
 	ptr = *fdf;
-	if (extrema->x_min > 0 && extrema->y_min > 0)
+	if (extrema->x_min >= 0 && extrema->y_min >= 0)
 		return ;
 	while (ptr)
 	{
@@ -32,52 +32,45 @@ void	move_map_to_frame(t_fdf **fdf, t_extrema *extrema)
 	}
 }
 
-/**/
-void	new_resize_map(t_fdf **fdf)
+/*Puts the whole map into the frame by switching negative x and y values. Then
+resizes the projected map by applying the minimal transformation ratio on the x
+and y axis for each node of the list pointed at by 'fdf'*/
+void	resize_map(t_fdf **fdf)
 {
 	t_fdf		*ptr;
-	t_extrema	extrema;
-	float		x_transf_ratio;
-	float		y_transf_ratio;
+	t_extrema	extr;
+	float		ratio;
 
 	ptr = *fdf;
-	extrema = get_extrema(fdf);
-	move_map_to_frame(fdf, &extrema);
-	extrema = get_extrema(fdf);
-	x_transf_ratio = (float)WIDTH / extrema.x_max;
-	y_transf_ratio = (float)HEIGTH / extrema.y_max;
-	if (x_transf_ratio < y_transf_ratio)
-		y_transf_ratio = (float)WIDTH / (float)HEIGTH * x_transf_ratio;
-	else
-		x_transf_ratio = (float)WIDTH / (float)HEIGTH * y_transf_ratio;
+	extr = get_extrema(fdf);
+	move_map_to_frame(fdf, &extr);
+	extr = get_extrema(fdf);
+	ratio = ft_min_float((float)WIDTH / extr.x_max, (float)HEIGTH / extr.y_max);
 	while (ptr)
 	{
-		ptr->proj_data.x *= x_transf_ratio;
-		ptr->proj_data.y *= y_transf_ratio;
+		ptr->proj_data.x *= ratio;
+		ptr->proj_data.y *= ratio;
 		ptr = ptr->next;
 	}
 }
 
-/*Resizes the projected map by strecthing x_values to make them fit the WIDTH
-of the image. 'fdf->proj_data' is updated for each node of the list pointed at
-by 'fdf'*/
-void	resize_map(t_fdf **fdf)
+void	put_cross(t_vect_3 v, mlx_image_t *img, int colour)
 {
-	t_fdf		*ptr;
-	t_extrema	extrema;
-	float		x_transf_ratio;
-	float		y_transf_ratio;
-
-	ptr = *fdf;
-	extrema = get_extrema(fdf);
-	x_transf_ratio = (float)WIDTH / extrema.x_max;
-	y_transf_ratio = (float)HEIGTH / (float)WIDTH * x_transf_ratio;
-	while (ptr)
-	{
-		ptr->proj_data.x *= x_transf_ratio;
-		ptr->proj_data.y *= y_transf_ratio;
-		ptr = ptr->next;
-	}
+	if ((int)v.x >= 0 && (int)v.x <= WIDTH
+		&& (int)v.y >= 0 && (int)v.y <= HEIGTH)
+		mlx_put_pixel(img, (int)v.x, (int)v.y, colour);
+	if ((int)v.x >= 1 && (int)v.x <= WIDTH + 1
+		&& (int)v.y >= 0 && (int)v.y <= HEIGTH)
+		mlx_put_pixel(img, (int)v.x - 1, (int)v.y, colour);
+	if ((int)v.x >= -1 && (int)v.x <= WIDTH - 1
+		&& (int)v.y >= 0 && (int)v.y <= HEIGTH)
+		mlx_put_pixel(img, (int)v.x + 1, (int)v.y, colour);
+	if ((int)v.x >= 0 && (int)v.x <= WIDTH
+		&& (int)v.y >= 1 && (int)v.y <= HEIGTH + 1)
+		mlx_put_pixel(img, (int)v.x, (int)v.y - 1, colour);
+	if ((int)v.x >= 0 && (int)v.x <= WIDTH
+		&& (int)v.y >= -1 && (int)v.y <= HEIGTH - 1)
+		mlx_put_pixel(img, (int)v.x, (int)v.y + 1, colour);
 }
 
 /*Loops through the list pointed at by 'fdf' and connects all nodes to the
@@ -96,6 +89,7 @@ void	visualize_map(t_fdf **fdf, mlx_image_t *img)
 		if (!is_last_line(ptr, line_len))
 			plot(ptr->proj_data, get_nth_node(ptr, line_len)->proj_data,
 				img, 0x00FF00FF);
+		put_cross(ptr->proj_data, img, 0x000000FF);
 		ptr = ptr->next;
 	}
 }

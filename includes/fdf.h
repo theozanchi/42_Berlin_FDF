@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 10:55:44 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/08/04 17:08:02 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/08/07 19:05:50 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <fcntl.h>
 # include <unistd.h>
 
-# define _ALPHA 35.264
+# define _ALPHA 45
 # define _BETA 45
 # define _GAMMA 0
 
@@ -129,7 +129,6 @@ void		project_coordinates(t_fdf **fdf);
 
 /*visualize_map*/
 void		move_map_to_frame(t_fdf **fdf, t_extrema *extrema);
-void		new_resize_map(t_fdf **fdf);
 void		resize_map(t_fdf **fdf);
 void		visualize_map(t_fdf **fdf, mlx_image_t *img);
 
