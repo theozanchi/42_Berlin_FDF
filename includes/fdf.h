@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 10:55:44 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/08/07 19:05:50 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/08/08 15:05:38 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,13 +96,6 @@ t_bool		is_last_line(t_fdf *fdf, int line_length);
 int			get_line_length(t_fdf **fdf);
 t_extrema	get_extrema(t_fdf **fdf);
 
-/*_utils_matrix_calc*/
-t_vect_3	matrix_vector_mult(t_mtx_3x3 matrix, t_vect_3 vector);
-t_mtx_3x3	alpha_rot_mtx(float theta);
-t_mtx_3x3	beta_rot_mtx(float theta);
-t_mtx_3x3	gamma_rot_mtx(float theta);
-t_vect_3	proj_vect(t_vect_3 v, t_mtx_3x3 alp, t_mtx_3x3 bet, t_mtx_3x3 gam);
-
 /*bresenham_line_algo*/
 void		init_bresenham_utils(t_br_utils *ut, t_vect_3 a, t_vect_3 b);
 void		horizontal(t_br_utils ut, mlx_image_t *img, int colour);
@@ -126,6 +119,8 @@ int			main(int argc, char **argv);
 
 /*projection*/
 void		project_coordinates(t_fdf **fdf);
+t_vect_3	matrix_vector_mult(t_mtx_3x3 matrix, t_vect_3 vector);
+t_mtx_3x3	rot_mtx(float alp, float bet, float gam);
 
 /*visualize_map*/
 void		move_map_to_frame(t_fdf **fdf, t_extrema *extrema);
