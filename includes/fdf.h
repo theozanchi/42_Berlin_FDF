@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 10:55:44 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/08/08 15:05:38 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/08/09 13:35:21 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ typedef struct s_br_utils
 	int	y1;
 	int	delta_x;
 	int	delta_y;
+	int	is_steep;
 	int	p;
 	int	step_x;
 	int	step_y;
@@ -98,8 +99,7 @@ t_extrema	get_extrema(t_fdf **fdf);
 
 /*bresenham_line_algo*/
 void		init_bresenham_utils(t_br_utils *ut, t_vect_3 a, t_vect_3 b);
-void		horizontal(t_br_utils ut, mlx_image_t *img, int colour);
-void		vertical(t_br_utils ut, mlx_image_t *img, int colour);
+void		init_bresenham_utils_2(t_br_utils *ut);
 void		plot(t_vect_3 a, t_vect_3 b, mlx_image_t *img, int colour);
 
 /*errors*/
