@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 17:11:34 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/08/09 13:29:42 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/08/09 13:43:25 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ void	visualize_map(t_fdf **fdf, mlx_image_t *img)
 	t_fdf	*ptr;
 	int		line_len;
 
+	project_coordinates(fdf);
+	resize_map(fdf);
 	ptr = *fdf;
 	line_len = get_line_length(fdf);
 	while (ptr)

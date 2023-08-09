@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 10:53:00 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/08/07 15:23:19 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/08/09 13:43:32 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int	main(int argc, char **argv)
 	t_fdf		*fdf;
 	mlx_t		*mlx;
 	mlx_image_t	*img;
-	t_fdf		*ptr;
 
 	if (!arg_is_valid(argc, argv))
 		return (error(INVALID_ARG_ERR));
@@ -34,14 +33,6 @@ int	main(int argc, char **argv)
 	img = mlx_new_image(mlx, WIDTH, HEIGTH);
 	if (!img || mlx_image_to_window(mlx, img, 0, 0) < 0)
 		return (error(IMG_INIT_ERR));
-	project_coordinates(&fdf);
-	resize_map(&fdf);
-	ptr = fdf;
-	while (ptr)
-	{
-		printf("(%i, %i, %i)   (%i, %i, %i)   EOL: %i\n", (int)ptr->data.x, (int)ptr->data.y, (int)ptr->data.z, (int)ptr->proj_data.x, (int)ptr->proj_data.y, (int)ptr->proj_data.z, ptr->end_of_line);
-		ptr = ptr->next;
-	}
 	visualize_map(&fdf, img);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
