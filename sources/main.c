@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 10:53:00 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/08/09 13:43:32 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/08/10 13:35:10 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,28 +15,26 @@
 
 int	main(int argc, char **argv)
 {
-	int			fd;
-	t_fdf		*fdf;
-	mlx_t		*mlx;
-	mlx_image_t	*img;
+	t_proj_data	data;
 
 	if (!arg_is_valid(argc, argv))
 		return (error(INVALID_ARG_ERR));
-	fd = open(argv[1], O_RDONLY);
-	if (fd < 0)
+	data.fd = open(argv[1], O_RDONLY);
+	if (data.fd < 0)
 		return (error(FILE_READING_ERR));
-	if (!parse_fdf_file(fd, &fdf))
+	if (!parse_fdf_file(data.fd, &data.fdf))
 		return (error(MAP_PARSING_ERR));
-	mlx = mlx_init(WIDTH, HEIGTH, argv[1], TRUE);
-	if (!mlx)
+	data.mlx = mlx_init(WIDTH, HEIGTH, ft_strrchr(argv[1], '/') + 1, TRUE);
+	if (!data.mlx)
 		return (error(MLX_INIT_ERR));
-	img = mlx_new_image(mlx, WIDTH, HEIGTH);
-	if (!img || mlx_image_to_window(mlx, img, 0, 0) < 0)
+	data.img = mlx_new_image(data.mlx, WIDTH, HEIGTH);
+	if (!data.img || mlx_image_to_window(data.mlx, data.img, 0, 0) < 0)
 		return (error(IMG_INIT_ERR));
-	visualize_map(&fdf, img);
-	mlx_loop(mlx);
-	mlx_terminate(mlx);
-	free_vectors(&fdf);
-	close(fd);
+	visualize_map(&data.fdf, data.img);
+	mlx_key_hook(data.mlx, &my_keyhook, &data);
+	mlx_loop(data.mlx);
+	mlx_terminate(data.mlx);
+	free_vectors(&data.fdf);
+	close(data.fd);
 	return (0);
 }

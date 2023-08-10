@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 10:55:44 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/08/09 13:35:21 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/08/10 13:33:36 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 # include <fcntl.h>
 # include <unistd.h>
 
-# define _ALPHA 45
-# define _BETA 45
+# define _ALPHA 0
+# define _BETA 0
 # define _GAMMA 0
 
 # define WIDTH 1080
@@ -37,13 +37,6 @@ typedef enum e_exit
 	FAILURE,
 	SUCCESS
 }	t_exit;
-
-typedef enum e_angle
-{
-	ALPHA,
-	BETA,
-	GAMMA
-}	t_angle;
 
 typedef struct s_mtx_3x3
 {
@@ -89,6 +82,14 @@ typedef struct s_extrema
 	float	y_max;
 }	t_extrema;
 
+typedef struct s_proj_data
+{
+	int			fd;
+	t_fdf		*fdf;
+	mlx_t		*mlx;
+	mlx_image_t	*img;
+}	t_proj_data;
+
 /*_utils_list*/
 t_fdf		*ft_lstnew(int x, int y, int z, t_bool end_of_line);
 void		ft_lstadd_back(t_fdf **lst, t_fdf *new);
@@ -116,6 +117,9 @@ void		free_vectors(t_fdf **vectors);
 
 /*main*/
 int			main(int argc, char **argv);
+
+/*mlx_hooks*/
+void		my_keyhook(mlx_key_data_t keydata, void *param);
 
 /*projection*/
 void		project_coordinates(t_fdf **fdf);

@@ -6,7 +6,7 @@
 #    By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/12 10:48:22 by tzanchi           #+#    #+#              #
-#    Updated: 2023/08/08 14:29:03 by tzanchi          ###   ########.fr        #
+#    Updated: 2023/08/10 13:19:53 by tzanchi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,6 +51,7 @@ SRC			=	_utils_list_1.c \
 				file_parsing.c \
 				free.c \
 				main.c \
+				mlx_hooks.c \
 				projection.c \
 				visualize_map.c
 
