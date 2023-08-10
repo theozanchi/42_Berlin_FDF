@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bresenham_line_algo.c                              :+:      :+:    :+:   */
+/*   bresenham_line_algo_2.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 16:37:59 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/08/09 13:39:50 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/08/10 17:00:05 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	init_bresenham_utils(t_br_utils *ut, t_vect_3 a, t_vect_3 b)
 	ut->y1 = (int)b.y;
 	ut->delta_x = abs(ut->x1 - ut->x0);
 	ut->delta_y = abs(ut->y1 - ut->y0);
-	ut->is_steep = (ut->delta_y > ut->delta_x);
+	ut->err = ut->delta_x - ut->delta_y;
 	if (ut->x1 >= ut->x0)
 		ut->step_x = 1;
 	else
@@ -39,30 +39,6 @@ void	init_bresenham_utils(t_br_utils *ut, t_vect_3 a, t_vect_3 b)
 		ut->step_y = 1;
 	else
 		ut->step_y = -1;
-	init_bresenham_utils_2(ut);
-}
-
-/*Initialize in the structure pointed at by 'ut' the initial values needed by
-the Bresenham algorithm:
-• if the line is steep, x0 and y0 are swapped, x1 and y1 are swapped
-• if x0 > x1, x0 and x1 are swapped, y0 and y1 are swapped
-• delta_x and delta_y are updated
-• p: the error value is initialized*/
-void	init_bresenham_utils_2(t_br_utils *ut)
-{
-	if (ut->is_steep)
-	{
-		ft_swap(&ut->x0, &ut->y0);
-		ft_swap(&ut->x1, &ut->y1);
-	}
-	if (ut->x0 > ut->x1)
-	{
-		ft_swap(&ut->x0, &ut->x1);
-		ft_swap(&ut->y0, &ut->y1);
-	}
-	ut->delta_x = ut->x1 - ut->x0;
-	ut->delta_y = abs(ut->y1 - ut->y0);
-	ut->p = 2 * ut->delta_y - ut->delta_x;
 }
 
 /*Draws a line in the image pointed at by 'img', with colour 'colour' from
@@ -72,22 +48,20 @@ void	plot(t_vect_3 a, t_vect_3 b, mlx_image_t *img, int colour)
 	t_br_utils	ut;
 
 	init_bresenham_utils(&ut, a, b);
-	while (ut.x0 <= ut.x1)
+	while (ut.x0 != ut.x1 || ut.y0 != ut.y1)
 	{
-		if (ut.is_steep
-			&& ut.y0 >= 0 && ut.y0 <= WIDTH && ut.x0 >= 0 && ut.x0 <= HEIGTH)
-			mlx_put_pixel(img, ut.y0, ut.x0, colour);
-		else
+		if (ut.x0 >= 0 && ut.x0 <= WIDTH && ut.y0 >= 0 && ut.y0 <= HEIGTH)
+			mlx_put_pixel(img, ut.x0, ut.y0, colour);
+		ut.e2 = 2 * ut.err;
+		if (ut.e2 > -ut.delta_y)
 		{
-			if (ut.x0 >= 0 && ut.x0 <= WIDTH && ut.y0 >= 0 && ut.y0 <= HEIGTH)
-				mlx_put_pixel(img, ut.x0, ut.y0, colour);
+			ut.err -= ut.delta_y;
+			ut.x0 += ut.step_x;
 		}
-		if (ut.p >= 0)
+		if (ut.e2 < ut.delta_x)
 		{
+			ut.err += ut.delta_x;
 			ut.y0 += ut.step_y;
-			ut.p -= 2 * ut.delta_x;
 		}
-		ut.p += 2 * ut.delta_y;
-		ut.x0++;
 	}
 }

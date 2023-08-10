@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 17:11:34 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/08/10 15:45:11 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/08/10 17:01:25 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,11 +87,10 @@ void	visualize_map(t_fdf **fdf, mlx_image_t *img)
 	while (ptr)
 	{
 		if (!ptr->end_of_line)
-			plot(ptr->proj_data, ptr->next->proj_data, img, 0xff0000ff);
+			plot(ptr->proj_data, ptr->next->proj_data, img, 0xffffffff);
 		if (!is_last_line(ptr, line_len))
 			plot(ptr->proj_data, get_nth_node(ptr, line_len)->proj_data,
-				img, 0xffff00ff);
-		put_cross(ptr->proj_data, img, 0xff00ffFF);
+				img, 0xffffffff);
 		ptr = ptr->next;
 	}
 }
