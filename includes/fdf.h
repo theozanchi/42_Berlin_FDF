@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 10:55:44 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/08/10 13:33:36 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/08/10 15:48:16 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 # include <fcntl.h>
 # include <unistd.h>
 
-# define _ALPHA 0
-# define _BETA 0
+# define _ALPHA 45
+# define _BETA 45
 # define _GAMMA 0
 
 # define WIDTH 1080
@@ -118,8 +118,11 @@ void		free_vectors(t_fdf **vectors);
 /*main*/
 int			main(int argc, char **argv);
 
-/*mlx_hooks*/
+/*hooks*/
 void		my_keyhook(mlx_key_data_t keydata, void *param);
+
+/*image_init*/
+void		init_img(t_proj_data *data);
 
 /*projection*/
 void		project_coordinates(t_fdf **fdf);

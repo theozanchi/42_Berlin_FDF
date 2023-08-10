@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 10:53:00 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/08/10 13:35:10 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/08/10 16:17:42 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	main(int argc, char **argv)
 	data.img = mlx_new_image(data.mlx, WIDTH, HEIGTH);
 	if (!data.img || mlx_image_to_window(data.mlx, data.img, 0, 0) < 0)
 		return (error(IMG_INIT_ERR));
+	init_img(&data);
 	visualize_map(&data.fdf, data.img);
 	mlx_key_hook(data.mlx, &my_keyhook, &data);
 	mlx_loop(data.mlx);
