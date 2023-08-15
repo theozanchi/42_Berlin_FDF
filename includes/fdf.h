@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 10:55:44 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/08/10 17:00:15 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/08/14 18:53:47 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct s_fdf
 	t_vect_3		data;
 	t_vect_3		proj_data;
 	t_bool			end_of_line;
+	int				colour;
 	struct s_fdf	*next;
 }	t_fdf;
 
@@ -82,13 +83,13 @@ typedef struct s_extrema
 	float	y_max;
 }	t_extrema;
 
-typedef struct s_proj_data
+typedef struct s_data
 {
 	int			fd;
 	t_fdf		*fdf;
 	mlx_t		*mlx;
 	mlx_image_t	*img;
-}	t_proj_data;
+}	t_data;
 
 /*_utils_list*/
 t_fdf		*ft_lstnew(int x, int y, int z, t_bool end_of_line);
@@ -121,7 +122,7 @@ int			main(int argc, char **argv);
 void		my_keyhook(mlx_key_data_t keydata, void *param);
 
 /*image_init*/
-void		init_img(t_proj_data *data);
+void		init_img(t_data *data);
 
 /*projection*/
 void		project_coordinates(t_fdf **fdf);
@@ -131,6 +132,6 @@ t_mtx_3x3	rot_mtx(float alp, float bet, float gam);
 /*visualize_map*/
 void		move_map_to_frame(t_fdf **fdf, t_extrema *extrema);
 void		resize_map(t_fdf **fdf);
-void		visualize_map(t_fdf **fdf, mlx_image_t *img);
+void		visualize_map(t_data *data);
 
 #endif

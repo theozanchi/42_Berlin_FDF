@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 17:11:34 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/08/10 17:01:25 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/08/14 18:52:38 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,43 +54,22 @@ void	resize_map(t_fdf **fdf)
 	}
 }
 
-void	put_cross(t_vect_3 v, mlx_image_t *img, int colour)
-{
-	if (v.x >= 0 && v.x <= WIDTH
-		&& v.y >= 0 && v.y <= HEIGTH)
-		mlx_put_pixel(img, v.x, v.y, colour);
-	if (v.x >= 1 && v.x <= WIDTH + 1
-		&& v.y >= 0 && v.y <= HEIGTH)
-		mlx_put_pixel(img, v.x - 1, v.y, colour);
-	if (v.x >= -1 && v.x <= WIDTH - 1
-		&& v.y >= 0 && v.y <= HEIGTH)
-		mlx_put_pixel(img, v.x + 1, v.y, colour);
-	if (v.x >= 0 && v.x <= WIDTH
-		&& v.y >= 1 && v.y <= HEIGTH + 1)
-		mlx_put_pixel(img, v.x, v.y - 1, colour);
-	if (v.x >= 0 && v.x <= WIDTH
-		&& v.y >= -1 && v.y <= HEIGTH - 1)
-		mlx_put_pixel(img, v.x, v.y + 1, colour);
-}
-
 /*Loops through the list pointed at by 'fdf' and connects all nodes to the
 surrounding nodes (top, down, left and right)*/
-void	visualize_map(t_fdf **fdf, mlx_image_t *img)
+void	visualize_map(t_data *data)
 {
 	t_fdf	*ptr;
 	int		line_len;
 
-	project_coordinates(fdf);
-	resize_map(fdf);
-	ptr = *fdf;
-	line_len = get_line_length(fdf);
+	ptr = data->fdf;
+	line_len = get_line_length(&data->fdf);
 	while (ptr)
 	{
 		if (!ptr->end_of_line)
-			plot(ptr->proj_data, ptr->next->proj_data, img, 0xffffffff);
+			plot(ptr->proj_data, ptr->next->proj_data, data->img, ptr->colour);
 		if (!is_last_line(ptr, line_len))
 			plot(ptr->proj_data, get_nth_node(ptr, line_len)->proj_data,
-				img, 0xffffffff);
+				data->img, ptr->colour);
 		ptr = ptr->next;
 	}
 }

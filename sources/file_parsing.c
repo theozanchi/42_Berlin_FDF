@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 10:52:20 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/08/07 12:04:23 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/08/15 17:08:33 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,26 +19,34 @@ In case of failure, the list is freed and set to NULL*/
 t_exit	parse_line(char *line, t_fdf **fdf, int y_counter)
 {
 	char	**line_split;
-	char	**line_split_ptr;
-	int		x_counter;
-	t_fdf	*new_node;
+	char	**ptr;
+	int		x_cnt;
+	t_fdf	*node;
+	char	*colour;
 
 	line_split = ft_split(line, ' ');
-	line_split_ptr = line_split;
-	x_counter = 0;
-	while (*line_split_ptr)
+	ptr = line_split;
+	x_cnt = 0;
+	while (*ptr)
 	{
-		new_node = ft_lstnew(x_counter++, y_counter,
-				ft_atoi(*line_split_ptr), *(line_split_ptr + 1) == NULL);
-		if (!new_node)
+		node = ft_lstnew(x_cnt++, y_counter, ft_atoi(*ptr), *(ptr + 1) == NULL);
+		if (!node)
 		{
 			free_char_array(line_split);
 			free(line);
 			free_vectors(fdf);
 			return (FAILURE);
 		}
-		line_split_ptr++;
-		ft_lstadd_back(fdf, new_node);
+		if (ft_strnstr(*ptr, "0x", ft_strlen(*ptr)))
+		{
+			colour = ft_strjoin(ft_strnstr(*ptr, "0x", ft_strlen(*ptr)), "FF");
+			node->colour = ft_strtoui(colour, 0);
+			free(colour);
+		}
+		else
+			node->colour = 0xFFFFFFFF;
+		ptr++;
+		ft_lstadd_back(fdf, node);
 	}
 	free_char_array(line_split);
 	return (SUCCESS);

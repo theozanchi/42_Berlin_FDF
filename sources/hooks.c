@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_hooks.c                                        :+:      :+:    :+:   */
+/*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 17:43:29 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/08/10 13:20:23 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/08/14 15:08:46 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	my_keyhook(mlx_key_data_t keydata, void *param)
 {
-	t_proj_data	*data;
+	t_data	*data;
 
-	data = (t_proj_data *)param;
+	data = (t_data *)param;
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 		mlx_close_window(data->mlx);
 }
