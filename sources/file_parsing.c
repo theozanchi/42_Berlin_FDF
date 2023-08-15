@@ -6,11 +6,28 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 10:52:20 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/08/15 17:08:33 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/08/15 17:42:12 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+/*Checks if a hex colour code (starting with '0x') is present in the string
+'str' and if so, updates node->colour accordingly. If not, node->colour is set
+to black (0x000000FF)*/
+void	parse_colour(t_fdf *node, char **str)
+{
+	char	*colour;
+
+	if (ft_strnstr(*str, "0x", ft_strlen(*str)))
+	{
+		colour = ft_strjoin(ft_strnstr(*str, "0x", ft_strlen(*str)), "FF");
+		node->colour = ft_strtoui(colour, 0);
+		free(colour);
+	}
+	else
+		node->colour = 0x000000FF;
+}
 
 /*Parses each line of a .fdf file. Creates a new node for each element of the
 file (separated by ' ') and adding it at the back of the t_fdf linked list
@@ -22,7 +39,6 @@ t_exit	parse_line(char *line, t_fdf **fdf, int y_counter)
 	char	**ptr;
 	int		x_cnt;
 	t_fdf	*node;
-	char	*colour;
 
 	line_split = ft_split(line, ' ');
 	ptr = line_split;
@@ -37,15 +53,7 @@ t_exit	parse_line(char *line, t_fdf **fdf, int y_counter)
 			free_vectors(fdf);
 			return (FAILURE);
 		}
-		if (ft_strnstr(*ptr, "0x", ft_strlen(*ptr)))
-		{
-			colour = ft_strjoin(ft_strnstr(*ptr, "0x", ft_strlen(*ptr)), "FF");
-			node->colour = ft_strtoui(colour, 0);
-			free(colour);
-		}
-		else
-			node->colour = 0xFFFFFFFF;
-		ptr++;
+		parse_colour(node, ptr++);
 		ft_lstadd_back(fdf, node);
 	}
 	free_char_array(line_split);

@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 10:55:44 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/08/14 18:53:47 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/08/15 17:38:54 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ t_bool		arg_is_valid(int argc, char **argv);
 int			error(char *s);
 
 /*file_parsing*/
+void		parse_colour(t_fdf *node, char **str);
 t_exit		parse_line(char *line, t_fdf **fdf, int x_counter);
 t_exit		parse_fdf_file(int fd, t_fdf **fdf);
 
