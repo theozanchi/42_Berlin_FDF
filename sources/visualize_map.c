@@ -6,11 +6,24 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 17:11:34 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/08/14 18:52:38 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/08/15 19:35:30 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+void	shift_map(t_data *data, int x, int y)
+{
+	t_fdf	*ptr;
+
+	ptr = data->fdf;
+	while (ptr)
+	{
+		ptr->proj_data.x += x;
+		ptr->proj_data.y += y;
+		ptr = ptr->next;
+	}
+}
 
 /*Loops through the list pointed at by 'fdf' and brings all x and y values of
 proj_data into the frame by moving them of x_min up on the x axis if x_min is

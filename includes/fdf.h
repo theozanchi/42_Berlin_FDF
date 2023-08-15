@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 10:55:44 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/08/15 17:38:54 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/08/15 20:13:18 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,9 @@ typedef struct s_data
 	t_fdf		*fdf;
 	mlx_t		*mlx;
 	mlx_image_t	*img;
+	int			alpha;
+	int			beta;
+	int			gamma;
 }	t_data;
 
 /*_utils_list*/
@@ -126,11 +129,12 @@ void		my_keyhook(mlx_key_data_t keydata, void *param);
 void		init_img(t_data *data);
 
 /*projection*/
-void		project_coordinates(t_fdf **fdf);
+void		project_coordinates(t_data *data);
 t_vect_3	matrix_vector_mult(t_mtx_3x3 matrix, t_vect_3 vector);
 t_mtx_3x3	rot_mtx(float alp, float bet, float gam);
 
 /*visualize_map*/
+void		shift_map(t_data *data, int x, int y);
 void		move_map_to_frame(t_fdf **fdf, t_extrema *extrema);
 void		resize_map(t_fdf **fdf);
 void		visualize_map(t_data *data);

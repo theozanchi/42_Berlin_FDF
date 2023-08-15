@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 18:42:25 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/08/08 14:28:28 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/08/15 20:18:27 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,16 @@ rotating the map of an angle:
 • _ALPHA (in degrees) around the x axis
 • _BETA (in degrees) around the y axis
 • _GAMMA (in degrees) around the z axis*/
-void	project_coordinates(t_fdf **fdf)
+void	project_coordinates(t_data *data)
 {
 	t_fdf		*ptr;
 	t_mtx_3x3	mtx;
 
-	ptr = *fdf;
-	mtx = rot_mtx(ft_rad(_ALPHA), ft_rad(_BETA), ft_rad(_GAMMA));
+	ptr = data->fdf;
+	mtx = rot_mtx(ft_rad(data->alpha), ft_rad(data->beta), ft_rad(data->gamma));
 	while (ptr)
 	{
-		ptr->proj_data = matrix_vector_mult(mtx, ptr->data);
+		ptr->proj_data = matrix_vector_mult(mtx, ptr->proj_data);
 		ptr = ptr->next;
 	}
 }
