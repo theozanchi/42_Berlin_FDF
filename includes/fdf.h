@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 10:55:44 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/08/16 17:20:05 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/08/16 21:45:56 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,13 +120,9 @@ int			free_char_array(char **s);
 void		free_vectors(t_fdf **vectors);
 
 /*main*/
-int			main(int argc, char **argv);
-
-/*hooks*/
-void		my_keyhook(mlx_key_data_t keydata, void *param);
-
-/*image_init*/
 t_exit		init_img(t_data *data);
+void		my_keyhook(mlx_key_data_t keydata, void *param);;
+int			main(int argc, char **argv);
 
 /*projection*/
 void		project_coordinates(t_data *data);

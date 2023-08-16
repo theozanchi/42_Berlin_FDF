@@ -6,7 +6,7 @@
 #    By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/12 10:48:22 by tzanchi           #+#    #+#              #
-#    Updated: 2023/08/16 15:10:48 by tzanchi          ###   ########.fr        #
+#    Updated: 2023/08/16 21:45:46 by tzanchi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,8 +51,6 @@ SRC			=	_utils_list_1.c \
 				file_parsing.c \
 				free.c \
 				main.c \
-				hooks.c \
-				image_init.c \
 				projection.c \
 				visualize_map.c
 
