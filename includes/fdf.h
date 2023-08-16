@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 10:55:44 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/08/15 20:13:18 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/08/16 12:43:58 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <fcntl.h>
 # include <unistd.h>
 
-# define _ALPHA 45
+# define _ALPHA 35.264
 # define _BETA 45
 # define _GAMMA 0
 
@@ -89,9 +89,9 @@ typedef struct s_data
 	t_fdf		*fdf;
 	mlx_t		*mlx;
 	mlx_image_t	*img;
-	int			alpha;
-	int			beta;
-	int			gamma;
+	float		alpha;
+	float		beta;
+	float		gamma;
 }	t_data;
 
 /*_utils_list*/
