@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 17:11:34 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/08/16 17:12:30 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/08/16 21:00:15 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,18 +74,23 @@ void	resize_map(t_fdf **fdf)
 surrounding nodes (top, down, left and right)*/
 void	visualize_map(t_data *data)
 {
-	t_fdf	*ptr;
+	t_fdf	*ptr1;
 	int		line_len;
+	t_fdf	*ptr2;
 
-	ptr = data->fdf;
+	ptr1 = data->fdf;
 	line_len = get_line_length(&data->fdf);
-	while (ptr)
+	ptr2 = get_nth_node(ptr1, get_line_length(&data->fdf));
+	while (ptr1)
 	{
-		if (!ptr->end_of_line)
-			plot(ptr->proj_data, ptr->next->proj_data, data->img, ptr->colour);
-		if (!is_last_line(ptr, line_len))
-			plot(ptr->proj_data, get_nth_node(ptr, line_len)->proj_data,
-				data->img, ptr->colour);
-		ptr = ptr->next;
+		if (!ptr1->end_of_line)
+			plot(ptr1->proj_data, ptr1->next->proj_data,
+				data->img, ptr1->colour);
+		if (!is_last_line(ptr1, line_len))
+		{
+			plot(ptr1->proj_data, ptr2->proj_data, data->img, ptr1->colour);
+			ptr2 = ptr2->next;
+		}
+		ptr1 = ptr1->next;
 	}
 }

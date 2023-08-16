@@ -6,11 +6,20 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 17:43:29 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/08/16 17:13:23 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/08/16 21:33:12 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+void	rotate_angle(float *angle, float increment)
+{
+	*angle += increment;
+	if (*angle > 360)
+		*angle -= 360;
+	if (*angle < 0)
+		*angle = 360 - *angle;
+}
 
 void	my_keyhook(mlx_key_data_t keydata, void *param)
 {
