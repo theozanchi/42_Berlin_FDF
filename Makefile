@@ -6,14 +6,14 @@
 #    By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/12 10:48:22 by tzanchi           #+#    #+#              #
-#    Updated: 2023/08/10 17:00:39 by tzanchi          ###   ########.fr        #
+#    Updated: 2023/08/16 15:10:48 by tzanchi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #Compiler targets and libraries
 CC			=	cc
 UNAME		=	$(shell uname)
-CFLAGS		=	-Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS		=	-Wall -Wextra -Werror -g #-fsanitize=address
 NAME		=	fdf
 LIBFT		=	libft.a
 MLX42		=	libmlx42.a

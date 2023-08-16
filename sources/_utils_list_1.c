@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 19:17:03 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/08/04 16:05:29 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/08/16 17:10:12 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,17 @@ t_fdf	*ft_lstnew(int x, int y, int z, t_bool end_of_line)
 }
 
 /*Adds a new node 'new' at the end of the t_fdf list pointed by 'lst'*/
-void	ft_lstadd_back(t_fdf **lst, t_fdf *new)
+void	ft_lstadd_back(t_data *data, t_fdf **lst_ptr, t_fdf *node)
 {
-	t_fdf	*ptr;
-
-	if (!*lst)
-		*lst = new;
+	if (!data->fdf)
+	{
+		data->fdf = node;
+		*lst_ptr = node;
+	}
 	else
 	{
-		ptr = *lst;
-		while (ptr->next)
-			ptr = ptr->next;
-		ptr->next = new;
+		(*lst_ptr)->next = node;
+		*lst_ptr = node;
 	}
 }
 

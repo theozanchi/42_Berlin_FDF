@@ -6,23 +6,24 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 12:20:23 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/08/04 15:42:20 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/08/16 17:05:44 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
 /*Frees an array of strings*/
-void	free_char_array(char **s)
+int	free_char_array(char **s)
 {
 	char	**ptr;
 
 	if (!s || !*s)
-		return ;
+		return (0);
 	ptr = s;
 	while (*ptr)
 		free(*ptr++);
 	free(s);
+	return (0);
 }
 
 /*Frees and sets to NULL the linked list pointed at by 'fdf'*/

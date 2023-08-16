@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 10:53:00 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/08/14 16:45:16 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/08/16 15:36:01 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(int argc, char **argv)
 	data.fd = open(argv[1], O_RDONLY);
 	if (data.fd < 0)
 		return (error(FILE_READING_ERR));
-	if (!parse_fdf_file(data.fd, &data.fdf))
+	if (!parse_fdf_file(&data))
 		return (error(MAP_PARSING_ERR));
 	data.mlx = mlx_init(WIDTH, HEIGTH, ft_strrchr(argv[1], '/') + 1, TRUE);
 	if (!data.mlx)

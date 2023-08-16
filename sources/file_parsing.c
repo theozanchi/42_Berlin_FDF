@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 10:52:20 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/08/15 17:42:12 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/08/16 17:10:41 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,52 +33,52 @@ void	parse_colour(t_fdf *node, char **str)
 file (separated by ' ') and adding it at the back of the t_fdf linked list
 pointed at by 'fdf'
 In case of failure, the list is freed and set to NULL*/
-t_exit	parse_line(char *line, t_fdf **fdf, int y_counter)
+t_exit	parse_line(char *line, t_data *data, int y_cnt, t_fdf **lst_ptr)
 {
-	char	**line_split;
-	char	**ptr;
-	int		x_cnt;
-	t_fdf	*node;
+	char			**line_split;
+	char			**l_ptr;
+	int				x_cnt;
+	t_fdf			*node;
 
 	line_split = ft_split(line, ' ');
-	ptr = line_split;
+	l_ptr = line_split;
 	x_cnt = 0;
-	while (*ptr)
+	while (*l_ptr)
 	{
-		node = ft_lstnew(x_cnt++, y_counter, ft_atoi(*ptr), *(ptr + 1) == NULL);
+		node = ft_lstnew(x_cnt++, y_cnt, ft_atoi(*l_ptr), *(l_ptr + 1) == NULL);
 		if (!node)
-		{
-			free_char_array(line_split);
-			free(line);
-			free_vectors(fdf);
-			return (FAILURE);
-		}
-		parse_colour(node, ptr++);
-		ft_lstadd_back(fdf, node);
+			return (free_char_array(line_split));
+		parse_colour(node, l_ptr++);
+		ft_lstadd_back(data, lst_ptr, node);
 	}
-	free_char_array(line_split);
-	return (SUCCESS);
+	return (free_char_array(line_split) + SUCCESS);
 }
 
 /*Parses every line of a .fdf file using get_next_line(). Returns FAILURE if
 the parsing of any line fails and SUCCESS if all the lines were successfully
 The function loads all the data in a t_fdf linked list containing in each node
 all 3 (x, y, z) coordinates of each point*/
-t_exit	parse_fdf_file(int fd, t_fdf **fdf)
+t_exit	parse_fdf_file(t_data *data)
 {
 	char	*line;
 	int		y_counter;
+	t_fdf	*lst_ptr;
 
-	*fdf = NULL;
+	data->fdf = NULL;
+	lst_ptr = NULL;
 	y_counter = 0;
-	line = get_next_line(fd);
+	line = get_next_line(data->fd);
 	while (line)
 	{
-		if (!parse_line(line, fdf, y_counter))
+		if (!parse_line(line, data, y_counter, &lst_ptr))
+		{
+			free(line);
+			free_vectors(&data->fdf);
 			return (FAILURE);
+		}
 		y_counter++;
 		free(line);
-		line = get_next_line(fd);
+		line = get_next_line(data->fd);
 	}
 	return (SUCCESS);
 }

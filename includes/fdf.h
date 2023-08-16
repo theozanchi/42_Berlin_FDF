@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 10:55:44 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/08/16 12:43:58 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/08/16 17:10:21 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ typedef struct s_data
 
 /*_utils_list*/
 t_fdf		*ft_lstnew(int x, int y, int z, t_bool end_of_line);
-void		ft_lstadd_back(t_fdf **lst, t_fdf *new);
+void		ft_lstadd_back(t_data *data, t_fdf **lst_ptr, t_fdf *node);
 t_fdf		*get_nth_node(t_fdf *ptr, int n);
 t_bool		is_last_line(t_fdf *fdf, int line_length);
 int			get_line_length(t_fdf **fdf);
@@ -112,11 +112,11 @@ int			error(char *s);
 
 /*file_parsing*/
 void		parse_colour(t_fdf *node, char **str);
-t_exit		parse_line(char *line, t_fdf **fdf, int x_counter);
-t_exit		parse_fdf_file(int fd, t_fdf **fdf);
+t_exit		parse_line(char *line, t_data *data, int y_cnt, t_fdf **lst_ptr);
+t_exit		parse_fdf_file(t_data *data);
 
 /*free*/
-void		free_char_array(char **s);
+int			free_char_array(char **s);
 void		free_vectors(t_fdf **vectors);
 
 /*main*/

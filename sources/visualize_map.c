@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 17:11:34 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/08/15 19:35:30 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/08/16 17:12:30 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ void	shift_map(t_data *data, int x, int y)
 		ptr->proj_data.y += y;
 		ptr = ptr->next;
 	}
+	ft_memset(data->img->pixels, 0x00000000,
+		data->img->width * data->img->height * sizeof(int32_t));
+	visualize_map(data);
 }
 
 /*Loops through the list pointed at by 'fdf' and brings all x and y values of
