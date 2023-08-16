@@ -6,16 +6,19 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:46:41 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/08/15 20:19:46 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/08/16 17:20:35 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	init_img(t_data *data)
+t_exit	init_img(t_data *data)
 {
 	t_fdf	*ptr;
 
+	data->img = mlx_new_image(data->mlx, data->mlx->width, data->mlx->height);
+	if (!data->img || mlx_image_to_window(data->mlx, data->img, 0, 0) < 0)
+		return (FAILURE);
 	mlx_put_string(data->mlx, "Commands:", 5, 5);
 	mlx_put_string(data->mlx, "ESC to close window", 5, 25);
 	mlx_put_string(data->mlx, "Move image with keyboard arrows", 5, 45);
@@ -31,4 +34,5 @@ void	init_img(t_data *data)
 	project_coordinates(data);
 	resize_map(&data->fdf);
 	visualize_map(data);
+	return (SUCCESS);
 }

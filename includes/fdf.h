@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 10:55:44 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/08/16 17:10:21 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/08/16 17:20:05 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ int			main(int argc, char **argv);
 void		my_keyhook(mlx_key_data_t keydata, void *param);
 
 /*image_init*/
-void		init_img(t_data *data);
+t_exit		init_img(t_data *data);
 
 /*projection*/
 void		project_coordinates(t_data *data);
