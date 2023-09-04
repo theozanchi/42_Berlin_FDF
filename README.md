@@ -13,7 +13,7 @@ The full subject can be found [here](.media/en.subject.pdf).
 Clone the library and use `make` to compile
 ```
 git clone https://github.com/theozanchi/42_Berlin_FDF/tree/main
-cd 42_Berlin_libft
+cd 42_Berlin_FDF
 make
 ```
 
