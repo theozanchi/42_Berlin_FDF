@@ -18,3 +18,16 @@ make
 ```
 
 ![Compilation screenshot](.media/compilation_complete_screenshot.png)
+
+# Running the program
+
+Program expects a `.fdf` file as an entry parameter
+```
+./fdf maps/42.fdf
+```
+
+The function renders an isometric projection of the map passed as a parameter:
+![42.fdf screenshot](.media/42_screenshot.png)
+
+If colors are encoded in the entry file, they are also rendered:
+![t1.fdf screenshot](.media/t1_screenshot.png)
