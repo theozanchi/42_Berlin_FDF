@@ -8,7 +8,7 @@ This project is about creating a simple wireframe model representation of a 3D l
 The only external library that is allowed is `MLX42`, available [here](https://github.com/codam-coding-college/MLX42) on GitHub, created and maintained by [Codam](https://www.codam.nl/en/), member of the [42 Network](https://www.42network.org/). 
 The full subject can be found [here](.media/en.subject.pdf).
 
-# Downloading and compiling the library
+# Downloading and compiling the project
 
 Clone the library and use `make` to compile
 ```
